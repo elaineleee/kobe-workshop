@@ -13,33 +13,33 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+JP:wght@700&family=Noto+Serif+TC:wght@700&display=swap">
 <style>
-/* Layout: a 520px travel-booklet column — espresso header with a typeset flight block, sticky text tabs, date strip with large numerals, hairline-ruled timeline. Serif only for headings and large numerals; everything read closely is sans. */
+/* Layout: a 520px travel-booklet column — espresso header, sticky text tabs, compact date strip, hairline-ruled timeline.
+   Noto Serif TC for headings, Noto Sans TC for reading, Cormorant Garamond for stand-alone numerals (flights, dates, times) — like an airline ticket.
+   Type scale: 12.5 caption · 14 detail · 15 body · 16.5 item title · 19 section · 22 day title · 26 page title. */
 :root{
   --paper:#f7f2ea; --surface:#fffdf8; --surface-2:#efe8de; --ink:#2a1f19; --ink-2:#4a3d34; --muted:#6e6156; --hair:#e5dccf;
   --brand:#3b2a22; --brand-2:#2f211a; --on-brand:#f6efe6; --on-brand-dim:#d6c6b6;
-  --sel:#3b2a22; --on-sel:#f6efe6;
-  --gold:#7a5236; --gold-hd:#d6c6b6; --accent:#a3352b; --sage:#4d6044; --plum:#6b3850; --teal:#7a5236;
+  --sel:#3b2a22; --on-sel:#f6efe6; --accent:#a3352b; --link:#7a5236;
   --l-hankyu:#7a2333; --l-jr:#0b6bb3; --l-port:#08719c; --l-nankai:#b9461a; --l-metro:#c8202b; --l-ksub:#25784a; --l-rope:#8a5a2b; --l-bus:#237544; --l-taxi:#4b5661; --l-walk:#5c6873; --on-line:#ffffff;
+  --fs-cap:12.5px; --fs-sm:14px; --fs-body:15px; --fs-title:16.5px; --fs-h3:19px; --fs-h2:22px; --fs-h1:26px;
   --f-sans:"Noto Sans TC","Noto Sans JP","PingFang TC","Microsoft JhengHei",sans-serif;
   --f-serif:"Noto Serif TC","Noto Serif JP","Songti TC",serif;
-  --f-latin:"Cormorant Garamond","Noto Serif TC","Noto Serif JP",Georgia,serif;
   --f-ja:"Noto Sans JP","Noto Sans TC","Hiragino Sans",sans-serif;
+  --f-num:"Cormorant Garamond","Noto Serif TC",Georgia,serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --paper:#14110f; --surface:#1c1815; --surface-2:#26201c; --ink:#f3ece4; --ink-2:#dacfc3; --muted:#b2a596; --hair:#352d27;
   --brand:#2a1e18; --brand-2:#211812; --on-brand:#f3ebe1; --on-brand-dim:#cdbba8;
-  --sel:#d9b99a; --on-sel:#1a120d;
-  --gold:#d9b99a; --gold-hd:#cdbba8; --accent:#ec9686; --sage:#adc0a0; --plum:#d7a3bb; --teal:#d9b99a; color-scheme:dark;
+  --sel:#d9b99a; --on-sel:#1a120d; --accent:#ec9686; --link:#d9b99a; color-scheme:dark;
 }}
 :root[data-theme="dark"]{
   --paper:#14110f; --surface:#1c1815; --surface-2:#26201c; --ink:#f3ece4; --ink-2:#dacfc3; --muted:#b2a596; --hair:#352d27;
   --brand:#2a1e18; --brand-2:#211812; --on-brand:#f3ebe1; --on-brand-dim:#cdbba8;
-  --sel:#d9b99a; --on-sel:#1a120d;
-  --gold:#d9b99a; --gold-hd:#cdbba8; --accent:#ec9686; --sage:#adc0a0; --plum:#d7a3bb; --teal:#d9b99a; color-scheme:dark;
+  --sel:#d9b99a; --on-sel:#1a120d; --accent:#ec9686; --link:#d9b99a; color-scheme:dark;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{background:var(--paper)}
-body{background:var(--paper);color:var(--ink);font-family:var(--f-sans);font-size:15px;line-height:1.75;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-sans);font-size:var(--fs-body);line-height:1.75;font-variant-numeric:tabular-nums;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased}
 :lang(ja){font-family:var(--f-ja)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--brand-2)}
 .app{max-width:520px;margin:0 auto;min-height:100vh;background:var(--paper)}
@@ -47,158 +47,153 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .g{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 button{font-family:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--sel);outline-offset:2px}
-a{color:var(--teal)}
+a{color:var(--link)}
 
 /* header */
 .hd{background:var(--brand);color:var(--on-brand)}
-.hd-in{padding-block:24px 22px}
+.hd-in{padding-block:22px 20px}
 .hd-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.kicker{font-family:var(--f-latin);font-size:15px;font-weight:600;letter-spacing:.14em;color:var(--gold-hd)}
-h1{font-family:var(--f-serif);font-weight:700;font-size:30px;letter-spacing:.1em;line-height:1.35;margin-top:4px}
-.sub{font-size:13.5px;color:var(--on-brand-dim);margin-top:2px}
-.count{flex-shrink:0;font-size:13.5px;font-weight:500;border:1px solid color-mix(in srgb,var(--gold-hd) 70%,transparent);color:var(--on-brand);border-radius:999px;padding:3px 12px;white-space:nowrap;margin-top:2px}
-.rule{height:1px;background:color-mix(in srgb,var(--gold-hd) 45%,transparent);margin:18px 0 14px}
-.flights{display:grid;grid-template-columns:1fr 1px 1fr;gap:0 16px}
+h1{font-family:var(--f-serif);font-weight:700;font-size:var(--fs-h1);letter-spacing:.08em;line-height:1.35}
+.sub{font-size:var(--fs-cap);color:var(--on-brand-dim);margin-top:2px}
+.count{flex-shrink:0;font-size:var(--fs-cap);border:1px solid color-mix(in srgb,var(--on-brand) 35%,transparent);border-radius:999px;padding:2px 11px;white-space:nowrap;margin-top:4px}
+.kicker{font-family:var(--f-num);font-size:14px;font-weight:600;letter-spacing:.16em;color:var(--on-brand-dim)}
+.flights{display:grid;grid-template-columns:1fr 1px 1fr;gap:0 16px;margin-top:16px;padding-top:14px;border-top:1px solid color-mix(in srgb,var(--on-brand) 20%,transparent)}
 .flights .vr{background:color-mix(in srgb,var(--on-brand) 20%,transparent)}
 .fl{min-width:0}
-.fl-dir{font-size:13.5px;color:var(--on-brand-dim)}
-.fl-route{font-family:var(--f-latin);font-weight:600;font-size:27px;letter-spacing:.05em;line-height:1.25;margin-top:2px;font-variant-numeric:lining-nums}
+.fl-dir{font-size:var(--fs-cap);color:var(--on-brand-dim)}
+.fl-route{font-family:var(--f-num);font-size:27px;font-weight:600;letter-spacing:.05em;line-height:1.25;margin-top:2px;font-variant-numeric:lining-nums}
 .fl-route span{font-size:17px;opacity:.65;margin:0 4px}
-.fl-time{font-size:14px;font-weight:500;margin-top:2px}
-.fl-meta{font-size:13.5px;color:var(--on-brand-dim);line-height:1.6;margin-top:1px}
+.fl-time{font-family:var(--f-num);font-size:18px;font-weight:600;letter-spacing:.02em;font-variant-numeric:lining-nums}
+.fl-meta{font-size:var(--fs-cap);color:var(--on-brand-dim);line-height:1.6}
 
 /* tabs */
-.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--hair)}
-.tab{appearance:none;border:0;background:transparent;color:var(--muted);font-size:15px;font-weight:500;padding:13px 2px 11px;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;white-space:nowrap;letter-spacing:.06em;text-indent:.06em}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--hair)}
+.tab{appearance:none;border:0;background:transparent;color:var(--muted);font-size:var(--fs-body);font-weight:500;padding:12px 2px 10px;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;white-space:nowrap}
 .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--sel);font-weight:700}
 
 /* sub-tabs */
 .subtabs{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px 4px}
-.st{appearance:none;border:1px solid var(--hair);background:var(--surface);border-radius:999px;padding:5px 15px;font-size:14.5px;cursor:pointer;color:var(--ink-2)}
-.st[aria-pressed="true"]{background:var(--sel);border-color:var(--sel);color:var(--on-sel);font-weight:500}
+.st{appearance:none;border:1px solid var(--hair);background:var(--surface);border-radius:999px;padding:4px 14px;font-size:var(--fs-sm);cursor:pointer;color:var(--ink-2)}
+.st[aria-pressed="true"]{background:var(--sel);border-color:var(--sel);color:var(--on-sel)}
 
 /* date strip */
-.days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding-block:8px 0;border-bottom:1px solid var(--hair)}
-.day{appearance:none;border:0;background:transparent;padding:3px 2px 6px;text-align:center;cursor:pointer;min-width:0;position:relative;border-bottom:2px solid transparent;margin-bottom:-1px}
-.day .dw{font-size:11.5px;color:var(--muted);line-height:1.35}
-.day .dd{font-family:var(--f-latin);font-weight:600;font-size:18px;line-height:1.15;color:var(--muted);font-variant-numeric:lining-nums}
-.day .dc{font-size:11.5px;color:var(--muted);line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.day[aria-pressed="true"]{border-bottom-color:var(--sel)}
-.day[aria-pressed="true"] .dd{color:var(--sel)}
-.day[aria-pressed="true"] .dc,.day[aria-pressed="true"] .dw{color:var(--ink);font-weight:500}
-.day .td{position:absolute;top:5px;right:calc(50% - 15px);width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding-block:6px 0;border-bottom:1px solid var(--hair)}
+.day{appearance:none;border:0;background:transparent;padding:6px 2px 8px;text-align:center;cursor:pointer;min-width:0;position:relative;border-bottom:2px solid transparent;margin-bottom:-1px;line-height:1.4;color:var(--muted)}
+.day .dw{font-size:var(--fs-cap)}
+.day .dd{font-family:var(--f-num);font-size:21px;font-weight:600;line-height:1.2;font-variant-numeric:lining-nums}
+.day .dc{font-size:var(--fs-cap);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.day[aria-pressed="true"]{border-bottom-color:var(--sel);color:var(--ink)}
+.day .td{position:absolute;top:8px;right:calc(50% - 14px);width:5px;height:5px;border-radius:50%;background:var(--accent)}
 
 /* day head */
-.dh{padding-block:20px 4px}
-.dh .ey{font-size:13.5px;font-weight:500;color:var(--sel);letter-spacing:.04em}
-.dh h2{font-family:var(--f-serif);font-weight:700;font-size:23px;line-height:1.45;letter-spacing:.04em;margin-top:4px;text-wrap:balance}
-.dh .ds{font-size:15px;color:var(--ink-2);margin-top:6px;line-height:1.8}
-.facts{display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:16px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.dh{padding-block:20px 0}
+.dh .ey{font-size:var(--fs-cap);color:var(--muted)}
+.dh h2{font-family:var(--f-serif);font-weight:700;font-size:var(--fs-h2);line-height:1.45;letter-spacing:.04em;margin-top:2px;text-wrap:balance}
+.dh .ds{color:var(--ink-2);margin-top:6px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:14px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
 .fact{padding:10px 10px 10px 0;min-width:0}
 .fact+.fact{padding-left:12px;border-left:1px solid var(--hair)}
-.fact .k{font-size:13px;color:var(--muted)}
-.fact .v{font-size:14px;font-weight:500;line-height:1.5;margin-top:2px;word-break:keep-all;overflow-wrap:anywhere}
-.fact .v small{display:block;font-size:13px;color:var(--muted);font-weight:400}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-block:12px 0}
-.bar .bl{font-size:13px;color:var(--muted)}
-.linkbtn{appearance:none;border:0;background:none;color:var(--teal);font-size:14.5px;font-weight:500;cursor:pointer;padding:10px 0}
+.fact .k{font-size:var(--fs-cap);color:var(--muted)}
+.fact .v{font-size:var(--fs-sm);font-weight:500;line-height:1.55;margin-top:2px;word-break:keep-all;overflow-wrap:anywhere}
+.fact .v small{display:block;font-size:var(--fs-cap);color:var(--muted);font-weight:400}
+.bar{display:flex;justify-content:flex-end;padding-block:6px 0}
+.linkbtn{appearance:none;border:0;background:none;color:var(--link);font-size:var(--fs-sm);cursor:pointer;padding:8px 0}
 
 /* timeline */
-.tl{padding-bottom:36px}
-.it{display:grid;grid-template-columns:46px minmax(0,1fr);gap:0 12px;padding:18px 0;border-bottom:1px solid var(--hair)}
+.tl{padding-bottom:16px}
+.it{display:grid;grid-template-columns:46px minmax(0,1fr);gap:0 12px;padding:16px 0;border-bottom:1px solid var(--hair)}
 .it:last-child{border-bottom:0}
-.tcol .tm{font-size:15px;font-weight:700;line-height:1.45;color:var(--ink);font-variant-numeric:tabular-nums;padding-top:1px}
-.it.now .tm{color:var(--sel)}
-.tcol .nw{display:inline-block;margin-top:6px;font-size:12px;font-weight:700;color:var(--on-sel);background:var(--sel);padding:0 7px;border-radius:3px}
+.tcol .tm{font-family:var(--f-num);font-size:19px;font-weight:600;line-height:1.25;color:var(--ink);font-variant-numeric:lining-nums}
+.it.now .tm{color:var(--accent)}
+.tcol .nw{display:inline-block;margin-top:4px;font-size:var(--fs-cap);font-weight:700;color:var(--on-sel);background:var(--sel);padding:0 6px;border-radius:3px}
 .body{min-width:0}
-.cat{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--c)}
-.cat .du{color:var(--muted);font-weight:400}
-.cat .mp{margin-left:auto;font-size:13.5px;color:var(--teal);text-decoration:none;white-space:nowrap;padding:10px 0 10px 12px;margin-top:-10px;margin-bottom:-10px}
-.nm{font-size:17px;font-weight:700;line-height:1.5;margin-top:2px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
-.nm .bd{font-size:12.5px;font-weight:500;color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);border-radius:3px;padding:0 6px;line-height:1.7}
-.jp{font-size:13px;color:var(--muted);line-height:1.5}
-.sm{font-size:15px;color:var(--ink-2);margin-top:6px;line-height:1.8}
-.pr{font-size:14px;color:var(--ink-2);margin-top:4px;font-weight:500}
-.more{appearance:none;border:0;background:none;color:var(--teal);font-size:14.5px;font-weight:500;padding:10px 0 0;cursor:pointer}
-.x{display:flex;flex-direction:column;gap:12px;margin-top:12px}
-.desc{font-size:14.5px;line-height:1.85;color:var(--ink)}
-.note{font-size:14px;line-height:1.75;background:var(--surface-2);border-radius:6px;padding:9px 12px;color:var(--ink)}
-.note b{color:var(--accent);font-weight:700;margin-right:6px}
-.route{display:flex;flex-direction:column;gap:8px}
-.rr{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.65}
-.ln{flex-shrink:0;font-size:12px;font-weight:700;color:var(--on-line);background:var(--lc);border-radius:3px;padding:1px 0;width:70px;text-align:center;margin-top:2px}
+.cat{display:flex;align-items:baseline;gap:8px;font-size:var(--fs-cap);color:var(--muted);line-height:1.5}
+.cat .du{color:var(--muted)}
+.cat .mp{margin-left:auto;color:var(--link);text-decoration:none;white-space:nowrap;padding:10px 0 10px 12px;margin-top:-10px;margin-bottom:-10px}
+.nm{font-size:var(--fs-title);font-weight:700;line-height:1.5;margin-top:2px;display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px}
+.nm .bd{font-size:var(--fs-cap);font-weight:500;color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);border-radius:3px;padding:0 6px;line-height:1.6}
+.jp{font-size:var(--fs-cap);color:var(--muted);line-height:1.5}
+.sm{color:var(--ink-2);margin-top:4px}
+.pr{font-size:var(--fs-sm);color:var(--ink-2);margin-top:2px}
+.more{appearance:none;border:0;background:none;color:var(--link);font-size:var(--fs-sm);padding:6px 0 0;cursor:pointer}
+.x{display:flex;flex-direction:column;gap:12px;margin-top:10px}
+.desc{font-size:var(--fs-sm);line-height:1.85;color:var(--ink)}
+.note{font-size:var(--fs-sm);line-height:1.75;background:var(--surface-2);border-radius:6px;padding:8px 12px}
+.note b{color:var(--accent);margin-right:6px}
+.route{display:flex;flex-direction:column;gap:6px}
+.rr{display:flex;gap:10px;align-items:flex-start;font-size:var(--fs-sm);line-height:1.65}
+.ln{flex-shrink:0;font-size:var(--fs-cap);font-weight:700;color:var(--on-line);background:var(--lc);border-radius:3px;width:70px;text-align:center;margin-top:1px;line-height:1.7}
 .opts{border-top:1px solid var(--hair)}
-.opl{font-size:13.5px;font-weight:500;color:var(--muted);padding:10px 0 2px}
-.op{padding:10px 0;border-bottom:1px solid var(--hair)}
+.opl{font-size:var(--fs-cap);color:var(--muted);padding:10px 0 0}
+.op{padding:9px 0;border-bottom:1px solid var(--hair)}
 .oph{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px}
-.opn{font-weight:700;font-size:15px}
-.opp{font-size:13.5px;color:var(--ink-2);font-weight:500}
-.opb{font-size:12.5px;color:var(--sel);border:1px solid color-mix(in srgb,var(--sel) 50%,transparent);border-radius:3px;padding:0 5px}
-.opm{margin-left:auto;font-size:13.5px;color:var(--teal);text-decoration:none;white-space:nowrap;padding:10px 0 10px 12px;margin-top:-10px;margin-bottom:-10px}
-.opd{font-size:14px;color:var(--ink-2);margin-top:3px;line-height:1.8}
-.talks{margin-top:10px;border-top:1px solid var(--hair)}
-.talks .ch{font-size:13.5px;color:var(--muted);padding:8px 0 2px}
-.tk{display:grid;grid-template-columns:46px minmax(0,1fr);gap:8px;padding:9px 0;border-bottom:1px solid var(--hair)}
+.opn{font-weight:700;font-size:var(--fs-body)}
+.opp{font-size:var(--fs-sm);color:var(--ink-2)}
+.opb{font-size:var(--fs-cap);color:var(--sel);border:1px solid color-mix(in srgb,var(--sel) 45%,transparent);border-radius:3px;padding:0 5px;line-height:1.6}
+.opm{margin-left:auto;font-size:var(--fs-cap);color:var(--link);text-decoration:none;white-space:nowrap;padding:10px 0 10px 12px;margin-top:-10px;margin-bottom:-10px}
+.opd{font-size:var(--fs-sm);color:var(--ink-2);margin-top:2px;line-height:1.8}
+.talks{margin-top:8px;border-top:1px solid var(--hair)}
+.talks .ch{font-size:var(--fs-cap);color:var(--muted);padding:8px 0 0}
+.tk{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;padding:8px 0;border-bottom:1px solid var(--hair);font-size:var(--fs-sm);line-height:1.65}
 .tk:last-child{border-bottom:0}
-.tk .tt{font-size:14px;font-weight:500;color:var(--muted)}
-.tk .who{font-size:14px;font-weight:700;line-height:1.55}
-.tk .ttl{font-size:14px;color:var(--ink-2);line-height:1.65;margin-top:1px}
+.tk .tt{color:var(--muted)}
+.tk .who{font-weight:700}
+.tk .ttl{color:var(--ink-2)}
+.tfoot{font-size:var(--fs-cap);color:var(--muted);padding-block:0 32px}
 
 /* sections */
 .sec{padding-block:20px 6px}
-.sec h3{font-family:var(--f-serif);font-size:20px;font-weight:700;letter-spacing:.04em;line-height:1.4}
-.sec .lead{font-size:14px;color:var(--muted);margin-top:4px;line-height:1.75}
-.grp{font-size:13.5px;font-weight:700;color:var(--sel);margin-top:6px;letter-spacing:.04em}
+.sec h3{font-family:var(--f-serif);font-size:var(--fs-h3);font-weight:700;letter-spacing:.04em;line-height:1.4}
+.sec .lead{font-size:var(--fs-sm);color:var(--muted);margin-top:4px}
+.grp{font-size:var(--fs-cap);font-weight:700;color:var(--ink-2);margin-top:18px;letter-spacing:.04em}
 .list{margin-top:8px;border-top:1px solid var(--hair)}
-.row{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--hair)}
+.row{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--hair)}
 .row-t{min-width:0;flex:1}
-.rn{font-weight:700;font-size:15.5px;line-height:1.5}
-.rj{font-size:13px;color:var(--muted)}
-.rd{font-size:14px;color:var(--ink-2);margin-top:3px;line-height:1.8}
-.rp{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;align-items:baseline;font-size:13.5px}
-.rp .p{color:var(--ink-2);font-weight:500}
-.rp .w{color:var(--muted)}
-.rm{flex-shrink:0;font-size:13.5px;color:var(--teal);text-decoration:none;white-space:nowrap;padding:12px 0 12px 12px;margin:-10px 0}
-.rday{flex-shrink:0;font-size:13px;color:var(--muted);padding-top:3px;white-space:nowrap}
-.kv{display:grid;grid-template-columns:52px minmax(0,1fr);gap:6px 12px;font-size:14.5px;margin-top:10px;line-height:1.8}
+.rn{font-weight:700;font-size:var(--fs-body);line-height:1.5}
+.rj{font-size:var(--fs-cap);color:var(--muted)}
+.rd{font-size:var(--fs-sm);color:var(--ink-2);margin-top:2px;line-height:1.8}
+.rp{display:flex;gap:10px;flex-wrap:wrap;margin-top:2px;font-size:var(--fs-cap);color:var(--muted)}
+.rp .p{color:var(--ink-2)}
+.rm{flex-shrink:0;font-size:var(--fs-cap);color:var(--link);text-decoration:none;white-space:nowrap;padding:12px 0 12px 12px;margin:-10px 0}
+.rday{flex-shrink:0;font-size:var(--fs-cap);color:var(--muted);padding-top:2px;white-space:nowrap}
+.kv{display:grid;grid-template-columns:40px minmax(0,1fr);gap:6px 12px;font-size:var(--fs-sm);margin-top:10px;line-height:1.8}
 .kv dt{color:var(--muted)}
-.big{font-family:var(--f-latin);font-size:25px;font-weight:600;font-variant-numeric:lining-nums;letter-spacing:.03em;line-height:1.3}
+.big{font-family:var(--f-num);font-size:22px;font-weight:600;letter-spacing:.03em;font-variant-numeric:lining-nums}
 .cico{display:grid;grid-template-columns:1fr 1fr;margin-top:12px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
 .cico div{padding:8px 0}
 .cico div+div{border-left:1px solid var(--hair);padding-left:12px}
-.cico .l{font-size:13px;color:var(--muted)}
-.cico .v{font-family:var(--f-latin);font-weight:600;font-size:24px;font-variant-numeric:lining-nums;line-height:1.2}
-.taxi{padding:16px 0;border-bottom:1px solid var(--hair)}
-.taxi .tz{font-size:13px;color:var(--muted)}
-.taxi .jpl{font-size:21px;font-weight:700;line-height:1.6;margin-top:4px;-webkit-user-select:text;user-select:text}
-.taxi .ad{font-size:15px;color:var(--ink-2);margin-top:2px;-webkit-user-select:text;user-select:text}
-.copy{appearance:none;border:1px solid var(--hair);background:var(--surface);border-radius:999px;font-size:13.5px;padding:5px 14px;cursor:pointer;color:var(--teal);margin-top:8px}
+.cico .l{font-size:var(--fs-cap);color:var(--muted)}
+.cico .v{font-family:var(--f-num);font-size:21px;font-weight:600;font-variant-numeric:lining-nums}
+.taxi{padding:14px 0;border-bottom:1px solid var(--hair)}
+.taxi .tz{font-size:var(--fs-cap);color:var(--muted)}
+.taxi .jpl{font-size:var(--fs-h3);font-weight:700;line-height:1.6;margin-top:2px;-webkit-user-select:text;user-select:text}
+.taxi .ad{font-size:var(--fs-sm);color:var(--ink-2);-webkit-user-select:text;user-select:text}
+.copy{appearance:none;border:1px solid var(--hair);background:var(--surface);border-radius:999px;font-size:var(--fs-cap);padding:4px 14px;cursor:pointer;color:var(--link);margin-top:8px}
 .tel{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--hair)}
-.tel .tn{font-size:19px;font-weight:700;letter-spacing:.02em;-webkit-user-select:text;user-select:text}
+.tel .tn{font-size:var(--fs-title);font-weight:700;-webkit-user-select:text;user-select:text}
 .tel .copy{margin-top:0}
 .ol{counter-reset:s;display:flex;flex-direction:column;gap:8px;margin-top:10px}
-.ol div{display:grid;grid-template-columns:24px minmax(0,1fr);font-size:14.5px;line-height:1.85}
-.ol div::before{counter-increment:s;content:counter(s);font-family:var(--f-latin);font-weight:600;font-size:18px;color:var(--sel);line-height:1.6}
+.ol div{display:grid;grid-template-columns:22px minmax(0,1fr);font-size:var(--fs-sm);line-height:1.85}
+.ol div::before{counter-increment:s;content:counter(s) ".";font-weight:700;color:var(--ink-2)}
 
 /* tools */
 .conv{display:flex;flex-direction:column;gap:14px;margin-top:12px}
 .cv-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.cv-row label{font-size:13.5px;color:var(--muted);min-width:34px}
-.cv-in{font-family:var(--f-latin);font-variant-numeric:lining-nums;font-size:27px;font-weight:600;width:100%;max-width:150px;border:0;border-bottom:1px solid var(--ink-2);background:transparent;color:var(--ink);padding:0 2px}
-.cv-in.sm{font-size:21px;max-width:96px}
-.unit{font-size:14px;color:var(--muted)}
+.cv-row label{font-size:var(--fs-cap);color:var(--muted);min-width:34px}
+.cv-in{font-family:inherit;font-size:var(--fs-h3);font-weight:700;width:100%;max-width:150px;border:0;border-bottom:1px solid var(--ink-2);background:transparent;color:var(--ink);padding:0 2px}
+.cv-in.sm{max-width:90px}
+.unit{font-size:var(--fs-sm);color:var(--muted)}
 .seg{display:inline-flex;border:1px solid var(--hair);border-radius:999px;overflow:hidden}
-.seg button{appearance:none;border:0;background:var(--surface);padding:5px 14px;font-size:14px;cursor:pointer;color:var(--muted)}
+.seg button{appearance:none;border:0;background:var(--surface);padding:4px 14px;font-size:var(--fs-sm);cursor:pointer;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--sel);color:var(--on-sel)}
 .result{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:12px 0}
-.result .rl{font-size:13.5px;color:var(--muted)}
-.result .rv{font-family:var(--f-latin);font-variant-numeric:lining-nums;font-size:36px;font-weight:600;line-height:1.25;color:var(--sel)}
-.qt{display:grid;grid-template-columns:1fr 1fr;gap:0 22px;font-size:14px}
+.result .rl{font-size:var(--fs-cap);color:var(--muted)}
+.result .rv{font-family:var(--f-num);font-size:32px;font-weight:600;line-height:1.3;color:var(--ink);font-variant-numeric:lining-nums}
+.qt{display:grid;grid-template-columns:1fr 1fr;gap:0 22px;font-size:var(--fs-sm)}
 .qt div{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--hair)}
-.qt span:first-child{font-weight:500}
 .qt span:last-child{color:var(--muted)}
-.hint{font-size:13.5px;color:var(--muted);line-height:1.8}
-.foot{font-size:13px;color:var(--muted);padding-block:22px 34px;line-height:1.8}
+.hint{font-size:var(--fs-cap);color:var(--muted);line-height:1.8}
+.foot{font-size:var(--fs-cap);color:var(--muted);padding-block:20px 32px;line-height:1.8}
 @media (prefers-reduced-motion:no-preference){.tab,.day,.st{transition:color .15s,border-color .15s,background-color .15s}}
 </style>
 
@@ -209,23 +204,22 @@ h1{font-family:var(--f-serif);font-weight:700;font-size:30px;letter-spacing:.1em
         <div>
           <div class="kicker">KOBE · OSAKA</div>
           <h1>神戶・大阪</h1>
-          <div class="sub">2026 年 11 月 12 日 – 16 日・五天四夜</div>
+          <div class="sub">11/12（四）– 11/16（一）・五天四夜</div>
         </div>
         <div class="count" id="count">倒數中</div>
       </div>
-      <div class="rule"></div>
       <div class="flights">
         <div class="fl">
           <div class="fl-dir">去程・11/12（四）</div>
           <div class="fl-route">TPE<span>→</span>UKB</div>
-          <div class="fl-time">JX1834・08:20 – 11:45</div>
+          <div class="fl-time">JX1834 · 08:20 – 11:45</div>
           <div class="fl-meta">桃園 T1 → 神戶 T2</div>
         </div>
         <div class="vr"></div>
         <div class="fl">
           <div class="fl-dir">回程・11/16（一）</div>
           <div class="fl-route">KIX<span>→</span>TPE</div>
-          <div class="fl-time">JX821・12:20 – 14:35</div>
+          <div class="fl-time">JX821 · 12:20 – 14:35</div>
           <div class="fl-meta">關西 T1 → 桃園 T1</div>
         </div>
       </div>
@@ -236,7 +230,6 @@ h1{font-family:var(--f-serif);font-weight:700;font-size:30px;letter-spacing:.1em
     <button class="tab" role="tab" data-tab="food" id="tab-food" aria-controls="view">美食</button>
     <button class="tab" role="tab" data-tab="places" id="tab-places" aria-controls="view">逛街</button>
     <button class="tab" role="tab" data-tab="info" id="tab-info" aria-controls="view">資訊</button>
-    <button class="tab" role="tab" data-tab="tools" id="tab-tools" aria-controls="view">工具</button>
   </nav>
   <main id="view" role="tabpanel"></main>
 </div>
@@ -258,36 +251,36 @@ const DAYS=[
  items:[
  {t:"06:20",cmp:"07:20",tz:"台灣時間",cat:"tr",n:"桃園機場 T1 報到",sum:"星宇 JX1834 08:20 起飛。託運 1 件，飛行 2 小時 25 分鐘，日本比台灣快 1 小時。"},
  {t:"11:45",cat:"tr",n:"抵達神戶機場 → 三宮",jp:"神戸空港 第2ターミナル",q:"Kobe Airport Terminal 2",dur:"約 1.5 小時",price:"Port Liner ¥340",
-  sum:"入境後搭 Port Liner 到三宮，先把行李寄放在飯店。",
+  sum:"入境後搭乘 Port Liner 至三宮，先將行李寄放於飯店。",
   x:[{r:[["walk","第 2 航廈 → Port Liner 神戸空港站 約 10 分鐘（或搭免費循環巴士）"],["port","神戸空港 → 三宮（終點站）約 18 分鐘，5–10 分鐘一班"],["walk","三宮站 → remm plus 約 5 分鐘"]]},
      {d:"第 2 航廈是 2025 年啟用的國際線航廈，規模小，入境約 30–45 分鐘。飯店 14:00 才能入住，先在櫃檯寄放行李。"}]},
  {t:"13:45",cat:"eat",n:"南京町 午餐",jp:"南京町",q:"Nankinmachi Kobe",dur:"約 45 分鐘",price:"¥1,000–2,000",
-  sum:"神戶的中華街，從飯店沿著有屋頂的商店街走 15 分鐘。邊走邊吃 2–3 樣。",
-  x:[{f:{l:"推薦",o:[
-      {n:"老祥記",p:"豚饅 ¥120／個",b:"必吃",d:"1915 年創業的肉包老店。本店 11/11 剛重新開幕，排隊超過 20 分鐘就跳過。",q:"老祥記 南京町"},
-      {n:"元祖ぎょうざ苑",p:"約 ¥1,000",d:"沾味噌醬吃的煎餃，可以坐下來吃。",q:"元祖ぎょうざ苑"},
-      {n:"YUNYUN",p:"約 ¥600",d:"煎小籠包，外帶邊走邊吃。",q:"YUNYUN 南京町"}]}}]},
- {t:"14:35",cat:"shop",n:"舊居留地・大丸神戶店",jp:"旧居留地・大丸神戸店",q:"Daimaru Kobe",dur:"約 50 分鐘",
-  sum:"就在南京町旁邊。明治時期的外國人居留地，石造洋館裡是精品和選物店。",
-  x:[{f:{l:"可以逛什麼",o:[
+  sum:"神戶中華街。從飯店沿有屋頂的商店街步行約 15 分鐘，建議品嚐 2–3 樣小吃。",
+  x:[{f:{l:"推薦店家",o:[
+      {n:"老祥記",p:"豚饅 ¥120／個",b:"必吃",d:"1915 年創業的肉包老店。本店 11/11 改建後重新開幕；排隊超過 20 分鐘可改選其他店家。",q:"老祥記 南京町"},
+      {n:"元祖ぎょうざ苑",p:"約 ¥1,000",d:"以味噌醬佐食的煎餃，店內設有座位。",q:"元祖ぎょうざ苑"},
+      {n:"YUNYUN",p:"約 ¥600",d:"煎小籠包，適合外帶。",q:"YUNYUN 南京町"}]}}]},
+ {t:"14:30",cat:"shop",n:"舊居留地・大丸神戶店",jp:"旧居留地・大丸神戸店",q:"Daimaru Kobe",dur:"約 40 分鐘",
+  sum:"緊鄰南京町。明治時期的外國人居留地，石造洋館內進駐精品與選物店。",
+  x:[{f:{l:"精選店家",o:[
       {n:"大丸神戶店",d:"地下 1 樓食品館可以先看伴手禮，神戸フランツ、ユーハイム、モロゾフ都是神戶起家的品牌。百貨外圍的石造迴廊是神戶最經典的街景。",q:"Daimaru Kobe"},
       {n:"舊居留地街區",d:"沿著棋盤狀街道散步，看石造洋館改建的精品店。神戶市立博物館的希臘式柱廊建築也在這一區。",q:"Kobe City Museum"},
-      {n:"乙仲通（有體力再去）",d:"往西南走 5 分鐘，老大樓裡藏著雜貨、古董和小咖啡店，例如乙仲アパートメント。",q:"乙仲通 神戸"}]}}]},
- {t:"15:30",cat:"cafe",n:"Salon15 TOOTH TOOTH 下午茶",jp:"Salon15 TOOTH TOOTH 旧神戸居留地十五番館",q:"Salon15 TOOTH TOOTH 旧神戸居留地十五番館",dur:"約 50 分鐘",price:"蛋糕＋紅茶約 ¥1,500–2,500",
-  sum:"在 1880 年代的舊居留地十五番館裡喝茶吃蛋糕，是這一區最有氣氛的咖啡廳。",
+      {n:"乙仲通（時間充裕時）",d:"往西南走 5 分鐘，老大樓裡藏著雜貨、古董和小咖啡店，例如乙仲アパートメント。",q:"乙仲通 神戸"}]}}]},
+ {t:"15:10",cat:"cafe",n:"Salon15 TOOTH TOOTH 下午茶",jp:"Salon15 TOOTH TOOTH 旧神戸居留地十五番館",q:"Salon15 TOOTH TOOTH 旧神戸居留地十五番館",dur:"約 1.5 小時",price:"蛋糕＋紅茶約 ¥1,500–2,500",
+  sum:"位於 1880 年代建造的舊居留地十五番館，是這一帶最具氛圍的茶沙龍。預留一個半小時，從容享用下午茶。",
   x:[{d:"2024 年改裝成甜點與紅茶沙龍。有季節水果下午茶，也賣自家烘焙點心和自家調配的紅茶。"},
      {d:"營業 11:00–20:00，不定休，電話 078-332-1515。完整的下午茶套餐建議先訂位，只吃蛋糕可以直接去。"},
-     {f:{l:"附近其他選擇",o:[
+     {f:{l:"附近咖啡廳",o:[
       {n:"エビアンコーヒー",p:"約 ¥600–1,200",d:"元町站旁的老派喫茶店，自家烘焙咖啡配戚風蛋糕或「神戸ハイカラプリン」。營業 08:30–18:30。",q:"エビアンコーヒー 元町"},
       {n:"tea room mahisa 元町店",p:"約 ¥1,200–2,000",d:"大丸神戶旁的紅茶專門店，司康和起司塔很受歡迎。",q:"tea room mahisa 元町店"}]}}]},
- {t:"16:30",cat:"go",n:"美利堅公園 看夕陽",jp:"メリケンパーク",q:"Meriken Park Kobe",dur:"約 45 分鐘",
-  sum:"看 BE KOBE 地標和紅色的神戶港塔，16:57 日落。",
+ {t:"16:45",cat:"go",n:"美利堅公園 看夕陽",jp:"メリケンパーク",q:"Meriken Park Kobe",dur:"約 40 分鐘",
+  sum:"BE KOBE 地標與紅色神戶港塔，16:57 日落。",
   x:[{r:[["walk","舊居留地 → 美利堅公園 約 10 分鐘"]]},
      {d:"想上港塔：展望樓層 ¥1,000，加屋頂露台 ¥1,200（09:00–23:00）。天黑後港塔和海洋博物館會亮燈。"}]},
- {t:"17:20",cat:"stay",n:"回三宮・入住休息",jp:"レムプラス神戸三宮",q:"remm plus Kobe Sannomiya",
-  sum:"從元町站搭 JR 一站回三ノ宮，18:00 入住休息。還有體力的話，改走商店街逛回飯店（約 45 分鐘）。",
+ {t:"17:30",cat:"stay",n:"回三宮・入住休息",jp:"レムプラス神戸三宮",q:"remm plus Kobe Sannomiya",
+  sum:"由 JR 元町站搭乘一站回三ノ宮，18:00 入住稍作休息。時間充裕的話，可沿元町商店街步行逛回飯店（約 45 分鐘）。",
   x:[{r:[["walk","美利堅公園 → JR 元町站 約 10 分鐘"],["jr","元町 → 三ノ宮 1 站 約 2 分鐘"]]},
-     {f:{l:"有體力再逛：元町商店街 → 三宮センター街",o:[
+     {f:{l:"延伸路線：元町商店街 → 三宮センター街",o:[
       {n:"神戶凮月堂 元町本店",d:"神戶代表伴手禮「ゴーフル」（法蘭酥）的本店。",q:"神戸凮月堂 元町本店"},
       {n:"はた珈琲店",d:"元町商店街的老字號咖啡店，3 樓自家烘焙，可以買咖啡豆。",q:"はた珈琲店 元町"},
       {n:"三宮センター街",d:"藥妝店集中，可以比價；ジュンク堂書店三宮店是大型書店；地下的「さんちか」直通車站。",q:"Sannomiya Center Gai"},
@@ -301,8 +294,8 @@ const DAYS=[
  sum:"The 3rd Academia Sinica–Kobe University Joint Workshop on Political Science Research。地點：六甲台第 1 校區 Building II（第二學舍）3 樓會議室。",
  wx:["多雲轉晴","15–21°","降雨 30%"],stay:["remm plus 神戶三宮","第 2 晚"],pace:["會議日","09:30 報到"],
  items:[
- {t:"07:45",cat:"eat",n:"早餐",sum:"神戶是麵包之都，前一晚買好最省時間。",
-  x:[{f:{l:"飯店步行 5 分鐘內",o:[
+ {t:"07:45",cat:"eat",n:"早餐",sum:"神戶以麵包聞名，建議前一晚先行購買。",
+  x:[{f:{l:"飯店周邊（步行 5 分鐘內）",o:[
       {n:"イスズベーカリー 生田ロード店",p:"¥300–600",d:"1946 年創業的神戶麵包店，咖哩麵包很有名。",q:"イスズベーカリー 生田ロード店"},
       {n:"ドンク 三宮本店",p:"¥300–800",d:"日本老牌麵包店的第一家店。",q:"ドンク 三宮本店"}]}}]},
  {t:"08:35",cat:"tr",n:"前往神戶大學",dur:"約 40 分鐘",sum:"阪急到六甲站，再搭公車或計程車上山。",
@@ -331,7 +324,7 @@ const DAYS=[
    ["15:20","Yi-Chun Chien（NCCU）","We All Grow Up with Emotional Blackmail: Exploring Gender, Affect, and Generation among Taiwanese Childless People"]]}},
  {t:"15:50",cat:"work",n:"Poster Session・閉幕",sum:"15:50 Poster Session（Kobe University Graduate Students），17:00 Concluding Remarks（Nick Lin）。"},
  {t:"18:00",cat:"eat",n:"晚宴",sum:"Dinner，地點等主辦單位通知。"},
- {t:"21:00",cat:"tr",n:"晚宴後回三宮",sum:"搭計程車最省力。",
+ {t:"21:00",cat:"tr",n:"晚宴後回三宮",sum:"建議搭乘計程車。",
   x:[{r:[["taxi","神大 → 三宮 約 20–25 分鐘・約 ¥2,500–3,500"],["bus","或搭 36 號到阪急六甲，再搭阪急回神戶三宮"]]}]}
  ]},
 {iso:"2026-11-14",d:"14",dw:"六",city:"北野",title:"北野・布引香草園",
@@ -339,120 +332,118 @@ const DAYS=[
  wx:["多雲時晴","14–21°","降雨 40%"],stay:["OMO關西空港","第 1 晚"],pace:["適中","午餐要先訂位"],
  items:[
  {t:"08:30",cat:"cafe",n:"にしむら珈琲 早餐",jp:"にしむら珈琲店 中山手本店",q:"にしむら珈琲店 中山手本店",dur:"約 1 小時",price:"早餐套餐約 ¥1,100",
-  sum:"退房、把行李寄在 remm plus 櫃檯，步行約 10 分鐘到 1948 年創業的神戶咖啡老店。",
+  sum:"退房並將行李寄放於 remm plus 櫃檯，步行約 10 分鐘前往 1948 年創業的神戶咖啡老店。",
   x:[{d:"中山手本店是第一家店，德式木造外觀。08:30 開店，早餐套餐 11:30 前點餐：烤吐司配火腿和炒蛋，有沙拉或水果兩種，附咖啡。店內賣濾掛咖啡包（¥160 起），適合當伴手禮。"},
-     {n:"週六早上人多，開店就到比較不用等。行李 19:00 回飯店拿。",h:"提醒"}]},
+     {n:"週六早晨人潮較多，建議開店即抵達。行李於 20:00 回飯店領取。",h:"提醒"}]},
  {t:"09:40",cat:"go",n:"生田神社",jp:"生田神社",q:"Ikuta Shrine Kobe",dur:"約 30 分鐘",price:"免費",
-  sum:"從咖啡店步行約 5 分鐘。「神戶」這個地名就是從這裡來的，求姻緣很有名。",
+  sum:"距咖啡店步行約 5 分鐘。「神戶」地名即源自此處，以祈求良緣聞名。",
   x:[{d:"必看：朱紅色樓門、本殿，以及本殿後方的「生田の森」小樹林。御朱印約 ¥500。11/15 是七五三，週六上午常有穿和服的小朋友來參拜。"}]},
  {t:"10:25",cat:"go",n:"北野異人館・北野天滿神社",jp:"北野異人館街・北野天満神社",q:"Kitano Ijinkan Kobe",dur:"約 1 小時 20 分鐘",price:"兩館聯票 ¥800",
-  sum:"沿北野坂上坡約 15 分鐘。看一座神社和兩棟洋館就好，不用每棟都進去。",
-  x:[{f:{l:"建議順序",o:[
+  sum:"沿北野坂上行約 15 分鐘。建議參觀一座神社與兩棟洋館即可。",
+  x:[{f:{l:"參觀順序",o:[
       {n:"北野天滿神社",p:"免費",d:"在風見雞之館旁的石階上方，從高處可以同時拍到洋館屋頂的風見雞和神戶街景，是北野最好的拍照點。",q:"北野天満神社 神戸"},
       {n:"風見雞之館（風見鶏の館）",p:"兩館聯票 ¥800",d:"1909 年的紅磚德國洋館，屋頂有風見雞。單館 ¥500，和萌黃之館一起買聯票比較划算（09:00–17:00）。",q:"風見鶏の館"},
       {n:"萌黃之館（萌黄の館）",d:"淡綠色的木造洋館，2 樓陽台看得到海。",q:"萌黄の館"}]}},
-     {d:"其他洋館沿北野通、うろこ坂散步看外觀就好。星巴克北野異人館店在 1907 年的洋館裡，人不多可以進去看看。"},
+     {d:"其餘洋館可沿北野通、うろこ坂欣賞外觀。星巴克北野異人館店位於 1907 年的洋館內，人潮不多時值得一訪。"},
      {r:[["walk","北野 → 三宮 下坡約 15 分鐘，接著吃午餐"]]}]},
  {t:"12:15",cat:"eat",n:"神戶牛鐵板燒",bd:"需訂位",dur:"約 1 小時 15 分鐘",price:"神戶牛午餐約 ¥9,680（Ishida）",
-  sum:"週六中午一定要先訂位。吃完搭地鐵一站到新神戶。",
-  x:[{f:{l:"三選一",o:[
+  sum:"週六午餐務必事先訂位。餐後搭地鐵一站前往新神戶。",
+  x:[{f:{l:"推薦餐廳",o:[
       {n:"神戶牛排 Ishida. 本店",p:"神戶牛午餐 ¥9,680",b:"可網路訂位",d:"里肌 130 g 的 7 道套餐，師傅在面前煎。午餐 11:30–15:00（14:00 最後點餐），週二公休。",q:"神戸牛ステーキ Ishida 本店"},
       {n:"花鳥風月（神戶牛鐵板燒）",p:"淡路牛午餐 ¥3,080",d:"¥3,080 是淡路牛套餐，每天限 10 份；神戶牛另外計價。只有 13 個吧檯座位。",q:"花鳥風月 神戸牛 和 鉄板焼 三宮"},
       {n:"Steakland 神戶館",p:"價格依克數",b:"沒訂到時",d:"不接受訂位，現場用 EPARK 抽號碼牌。午餐 11:00–14:00，約 13:00 停止抽號。阪急神戶三宮站西口步行 1 分鐘。",q:"ステーキランド神戸館"}]}},
      {d:"點餐建議：菜單上標「神戸ビーフ」的才是認證神戶牛，其他多半是黑毛和牛。部位選里肌（ロース）或菲力（ヒレ），100–150 g 就很夠。"}]},
- {t:"14:00",cat:"go",n:"新神戶纜車・布引香草園",jp:"神戸布引ロープウェイ・布引ハーブ園",q:"神戸布引ハーブ園 ハーブ園山麓駅",dur:"約 3 小時",price:"聖誕季特別票價（2025 年為 ¥2,800）",
-  sum:"纜車上山約 10 分鐘。慢慢喝咖啡、散步，待到 16:56 日落，看神戶港從夕陽到夜景。",
+ {t:"14:00",cat:"go",n:"新神戶纜車・布引香草園",jp:"神戸布引ロープウェイ・布引ハーブ園",q:"神戸布引ハーブ園 ハーブ園山麓駅",dur:"約 3.5 小時",price:"聖誕季特別票價（2025 年為 ¥2,800）",
+  sum:"纜車上山約 10 分鐘。於山頂咖啡廳小憩、沿花園散步，停留至 16:56 日落後，欣賞神戶港夜景與點燈的聖誕市集。",
   x:[{r:[["ksub","三宮 → 新神戶 1 站 約 2 分鐘（或步行 15 分鐘）"],["walk","新神戶站 → 纜車山麓站 約 5 分鐘"],["rope","山麓站 → 山頂站 約 10 分鐘"]]},
-     {f:{l:"怎麼逛",o:[
+     {f:{l:"參觀路線",o:[
       {n:"山頂站・展望廣場",d:"一出站就是展望廣場，看得到整個神戶市區和港口。日落前回到這裡看夕陽。"},
       {n:"THE VERANDA KOBE",d:"山頂的咖啡廳，2026 年 4 月重新開幕，2 樓是室內座位，1 樓是露台。"},
       {n:"沿步道走到風之丘",d:"往下約 30–40 分鐘，經過玻璃溫室，這幾週楓葉集中在這一段。走回山頂搭纜車，或直接從風之丘中間站下山。"},
       {n:"神戶聖誕市集",d:"山頂的聖誕市集（11/7–12/28），天黑後點燈。"}]}},
      {d:"聖誕季（11/7–12/25）票價另計，週六末班上山 20:15。下山後搭地鐵回三宮吃晚餐。"},
      {n:"週末纜車可能要排隊；強風或打雷時停駛。",h:"注意"}]},
- {t:"17:30",cat:"eat",n:"三宮 晚餐",dur:"約 1 小時",
-  sum:"中午吃得多，晚上吃輕一點。OMO 的餐廳 19:45 就停止點餐，晚餐在神戶吃完再出發。",
+ {t:"18:15",cat:"eat",n:"三宮 晚餐",dur:"約 1.5 小時",
+  sum:"午餐份量較多，晚餐建議清淡。OMO 餐廳 19:45 停止點餐，請在神戶用完晚餐再出發。",
   x:[{r:[["ksub","新神戶 → 三宮 約 2 分鐘"]]},
-     {f:{l:"選擇",o:[
+     {f:{l:"推薦餐廳",o:[
       {n:"明石焼 たちばな",p:"約 ¥800–1,000",d:"三宮巷內老店，蛋汁很多的明石燒沾高湯吃，份量輕。",q:"明石焼 たちばな 三宮"},
       {n:"グリル一平 三宮店",p:"約 ¥1,500–2,500",d:"神戶洋食：蛋包飯、漢堡排、炸牛排。",q:"グリル一平 三宮店"},
       {n:"さんちか（三宮地下街）",p:"¥1,000 起",d:"直通車站的地下街，餐廳選擇多，離巴士站也近。"}]}}]},
- {t:"19:00",cat:"tr",n:"拿行李・前往りんくうタウン",dur:"約 1 小時 30 分鐘",price:"巴士 ¥2,200＋電車 ¥370",
-  sum:"回飯店拿行李，搭 19:20 的機場巴士到關西機場 T1，再搭電車一站到りんくうタウン。",
-  x:[{f:{l:"A・機場巴士（推薦）",o:[
+ {t:"20:00",cat:"tr",n:"拿行李・前往りんくうタウン",dur:"約 1 小時 45 分鐘",price:"巴士 ¥2,200＋電車 ¥370",
+  sum:"回飯店領取行李，搭乘 20:20 機場巴士至關西機場 T1，再轉乘電車一站至りんくうタウン。",
+  x:[{f:{l:"方案 A｜機場巴士（推薦）",o:[
       {n:"飯店 → 巴士站",d:"站牌在神戸交通センタービル西側（三宮交差點西北角），從阪急神戶三宮站東口走過去約 3 分鐘。售票機在同一棟大樓西側，也可以在超商預購。",q:"神戸交通センタービル"},
-      {n:"神戶三宮 → 關西機場 T1",p:"¥2,200",d:"直達約 65 分鐘，晚上約 20 分鐘一班（19:00、19:20、20:00、20:20…）。行李放車腹，全程有座位。"},
+      {n:"神戶三宮 → 關西機場 T1",p:"¥2,200",d:"直達約 65 分鐘，晚上約 20 分鐘一班（20:00、20:20、20:40、21:00）。錯過 20:20 可改搭 20:40。行李放車腹，全程有座位。"},
       {n:"關西機場 → りんくうタウン",p:"¥370",d:"搭南海或 JR 往大阪方向一站，約 6 分鐘。出站步行 1 分鐘到 OMO。"}]}},
-     {f:{l:"B・JR（巴士沒搭到時）",o:[
+     {f:{l:"方案 B｜JR",o:[
       {n:"三ノ宮 → 大阪 → りんくうタウン",p:"約 ¥1,600",d:"新快速到大阪約 21 分鐘，換「関空快速」直達りんくうタウン約 65 分鐘，總共約 1 小時 40 分鐘。只有 1–4 號車去關西機場方向，5–8 號車在日根野分開往和歌山。"}]}},
-     {f:{l:"C・阪神＋南海（最便宜）",o:[
+     {f:{l:"方案 C｜阪神＋南海（票價最低）",o:[
       {n:"神戶三宮 → 大阪難波 → りんくうタウン",p:"約 ¥1,250",d:"阪神到大阪難波約 40 分鐘，走 8–10 分鐘換南海，空港急行到りんくうタウン約 49 分鐘。轉乘要提著行李走一段。"}]}}]},
- {t:"20:50",cat:"stay",n:"OMO關西空港 入住",jp:"OMO関西空港 by 星野リゾート",q:"OMO Kansai Airport by Hoshino Resorts",
+ {t:"21:50",cat:"stay",n:"OMO關西空港 入住",jp:"OMO関西空港 by 星野リゾート",q:"OMO Kansai Airport by Hoshino Resorts",
   sum:"りんくうタウン站 5 號出口步行 1 分鐘。入住時順便確認 11/16 10:00 的機場接駁巴士。",
-  x:[{d:"2 樓有超商。想喝一杯的話，22 樓酒吧營業到 22:00（21:45 最後點餐），只有下酒菜。"}]}
+  x:[{d:"2 樓有超商，可以買宵夜和明天的早餐。"}]}
  ]},
 {iso:"2026-11-15",d:"15",dw:"日",city:"大阪",title:"難波・梅田・りんくう Outlet",
- sum:"上午有雨，先在老喫茶店喝咖啡、逛有屋頂的心齋橋，中午在道頓堀吃飯；下午到梅田逛 Alpen OSAKA 和百貨，傍晚回りんくう逛 outlet。",
- wx:["雨後轉晴","16–18°","降雨 80%"],stay:["OMO關西空港","第 2 晚"],pace:["較滿","日落 16:53"],
+ sum:"上午在難波喝咖啡、逛百貨；中午到梅田用餐，接著逛梅田百貨和 Alpen OSAKA；傍晚回飯店放下購物袋，17:00 前往りんくう outlet。",
+ wx:["雨後轉晴","16–18°","降雨 80%"],stay:["OMO關西空港","第 2 晚"],pace:["較滿","上午有雨"],
  items:[
  {t:"08:00",cat:"eat",n:"早餐",sum:"OMOダイニング 21 樓早餐 buffet（06:00–10:00，約 ¥2,500），或站前超商。"},
  {t:"09:00",cat:"tr",n:"南海電車到難波",dur:"約 50 分鐘",price:"¥820",
-  sum:"空港急行直達，不用換車。",
+  sum:"空港急行直達，無需轉乘。",
   x:[{r:[["nankai","りんくうタウン → なんば，空港急行約 49 分鐘"],["walk","なんば站 → 丸福珈琲店 約 5 分鐘"]]}]},
  {t:"09:55",cat:"cafe",n:"丸福珈琲店 千日前本店",jp:"丸福珈琲店 千日前本店",q:"丸福珈琲店 千日前本店",dur:"約 40 分鐘",price:"咖啡＋鬆餅約 ¥1,500",
   sum:"1934 年創業的大阪喫茶老店，深焙咖啡和銅板煎的鬆餅最有名。",
-  x:[{d:"營業 08:00–23:00。招牌咖啡配銅板鬆餅（ホットケーキ），兩人分一份就好，留點胃吃午餐。也有自製布丁。"},
-     {f:{l:"另一家老喫茶",o:[
-      {n:"純喫茶アメリカン",p:"約 ¥1,200–1,800",d:"1946 年創業，在道頓堀旁的千日前商店街，華麗的昭和裝潢，招牌是厚鬆餅套餐。",q:"純喫茶アメリカン 道頓堀"}]}}]},
- {t:"10:40",cat:"shop",n:"心齋橋購物",jp:"心斎橋筋商店街・大丸心斎橋店・心斎橋PARCO",q:"Shinsaibashi-suji Shopping Street",dur:"約 50 分鐘",
-  sum:"約 600 公尺有屋頂的商店街，加上兩間百貨，下雨也不用撐傘。挑兩個重點逛就好。",
-  x:[{f:{l:"可以逛什麼",o:[
-      {n:"藥妝店",d:"心齋橋筋上松本清、大國藥妝等一家接一家，同一樣東西可以比價。",q:"Shinsaibashi-suji Shopping Street"},
-      {n:"大丸心齋橋店",d:"Vories 設計的 Art Deco 建築，2019 年改建時保留了外牆和內裝。本館 9 樓是寶可夢中心大阪 DX（有大阪限定商品），旁邊的寶可夢咖啡廳要先上網預約。",q:"大丸心斎橋店"},
-      {n:"心齋橋 PARCO",d:"2026 年大改裝：西日本最大的 Disney Store、JORDAN「World of Flight Osaka」、Goldwin、TAMBURINS、Vans。",q:"心斎橋PARCO"},
-      {n:"UNIQLO 心齋橋店",d:"心齋橋筋上的大型旗艦店，款式和尺寸齊全。",q:"UNIQLO 心斎橋店"}]}}]},
- {t:"11:35",cat:"eat",n:"道頓堀 午餐",jp:"道頓堀",q:"Dotonbori Glico Sign",dur:"約 1 小時",
-  sum:"從心齋橋往南走 5 分鐘，在戎橋拍固力果看板。週日中午人多，11:30 左右進去最好。",
-  x:[{f:{l:"坐下來吃（擇一）",o:[
-      {n:"道頓堀 今井",p:"約 ¥1,000–1,500",b:"推薦",d:"老字號烏龍麵店，招牌「きつねうどん」（豆皮烏龍麵）的高湯清澈鮮甜。用號碼牌排隊。",q:"道頓堀 今井 本店"},
-      {n:"美津の",p:"¥1,500–2,500",d:"米其林必比登推薦的大阪燒，加了山藥的麵糊口感鬆軟。週日要在 11:00 開店前去排。",q:"美津の 道頓堀"},
-      {n:"自由軒 難波本店",p:"約 ¥1,000",d:"1910 年創業，招牌「名物カレー」是咖哩和飯先拌好、中間打一顆生蛋。",q:"自由軒 難波本店"}]}},
-     {f:{l:"外帶加點",o:[
-      {n:"551 蓬萊 本店",p:"豚まん 2 個約 ¥500",d:"大阪名產肉包，排隊動得很快。",q:"551蓬莱 本店"},
-      {n:"たこ家道頓堀くくる 本店",p:"約 ¥600–900",d:"章魚燒，外皮薄、章魚塊大。",q:"たこ家道頓堀くくる 本店"}]}}]},
- {t:"13:00",cat:"shop",n:"Alpen OSAKA",jp:"Alpen OSAKA（ヤンマー フライングYビル）",q:"Alpen OSAKA 茶屋町",dur:"約 1 小時",
+  x:[{d:"營業 08:00–23:00。招牌咖啡配銅板鬆餅（ホットケーキ），建議兩人分食一份，保留午餐的胃口。也有自製布丁。"},
+     {f:{l:"其他選擇",o:[
+      {n:"純喫茶アメリカン",p:"約 ¥1,200–1,800",d:"1946 年創業，位於千日前商店街，華麗的昭和裝潢，招牌是厚鬆餅套餐。",q:"純喫茶アメリカン 道頓堀"}]}}]},
+ {t:"10:40",cat:"shop",n:"難波購物",jp:"髙島屋大阪店・なんばパークス・なんばCITY",q:"Takashimaya Osaka",dur:"約 1 小時 10 分鐘",
+  sum:"三處都與南海なんば站相連，雨天也不必出戶外。建議擇兩處重點。",
+  x:[{f:{l:"精選店家",o:[
+      {n:"髙島屋大阪店",d:"南海なんば站直通的老牌百貨。地下食品樓層的甜點與伴手禮齊全，也有精品與化妝品。",q:"Takashimaya Osaka"},
+      {n:"なんばパークス（Namba Parks）",d:"南海なんば站南側的商場，服飾、雜貨與生活用品為主；頂樓有階梯式空中花園，雨停後可上去走走。",q:"Namba Parks"},
+      {n:"なんばCITY",d:"南海なんば站樓下的商場，分本館與南館，以服飾、雜貨和餐廳為主。",q:"なんばCITY"}]}},
+     {f:{l:"外帶小吃",o:[
+      {n:"551 蓬萊 本店",p:"豚まん 2 個約 ¥500",d:"大阪名產肉包，隊伍消化快，可在搭車前外帶。",q:"551蓬莱 本店"}]}}]},
+ {t:"12:00",cat:"eat",n:"梅田 午餐",dur:"約 1 小時",
+  sum:"御堂筋線約 8 分鐘到梅田，在大阪站周邊用餐。",
+  x:[{r:[["metro","なんば → 梅田 約 8 分鐘・¥240"]]},
+     {f:{l:"推薦餐廳",o:[
+      {n:"お好み焼き きじ 本店",p:"約 ¥1,000–1,800",d:"梅田藍天大廈地下 1 樓「滝見小路」裡的大阪燒老店，在地人氣很高。",q:"きじ 本店 滝見小路"},
+      {n:"梅田 はがくれ",p:"約 ¥1,000–1,500",d:"大阪駅前第 3 ビル地下的讚岐烏龍麵名店，招牌是淋醬油吃的生醬油烏龍麵。",q:"梅田 はがくれ 本店"},
+      {n:"新梅田食道街",p:"約 ¥1,500–3,000",d:"JR 大阪站旁高架橋下的老字號美食街，串炸、燒鳥、拉麵都有。",q:"新梅田食道街"}]}}]},
+ {t:"13:10",cat:"shop",n:"梅田百貨",jp:"梅田",q:"阪急うめだ本店",dur:"約 1.5 小時",
+  sum:"阪急、阪神、LUCUA 三間百貨以地下街相連，建議擇兩間。",
+  x:[{f:{l:"精選店家",o:[
+      {n:"阪急うめだ本店",d:"話題甜點最多的百貨，地下 1 樓排隊名店集中，適合選購伴手禮。",q:"阪急うめだ本店"},
+      {n:"阪神梅田本店",p:"約 ¥200",d:"以美食見長；地下 1 樓的「いか焼き」（花枝煎餅）是大阪的代表性小吃。",q:"阪神梅田本店"},
+      {n:"LUCUA・LUCUA 1100",d:"JR 大阪站直通，日系服飾、雜貨與生活用品最齊全。",q:"LUCUA osaka"},
+      {n:"LUCUA SOUTH",d:"2026 年 4 月開幕的 LUCUA 新館（原大丸梅田 10–16 樓）。13 樓有寶可夢中心大阪和 Nintendo OSAKA。",q:"LUCUA SOUTH"}]}}]},
+ {t:"14:45",cat:"shop",n:"Alpen OSAKA",jp:"Alpen OSAKA（ヤンマー フライングYビル）",q:"Alpen OSAKA 茶屋町",dur:"約 50 分鐘",
   sum:"2026 年 8 月開幕的運動用品旗艦店，地下 2 樓到 4 樓共 6 層，阪急大阪梅田站步行 1 分鐘。",
-  x:[{r:[["metro","なんば → 梅田 約 8 分鐘・¥240"],["walk","梅田站 → 茶屋町 Alpen OSAKA 約 5 分鐘"]]},
-     {f:{l:"各樓層",o:[
+  x:[{f:{l:"樓層導覽",o:[
       {n:"1 樓 跑步・運動鞋",d:"跑鞋和各品牌運動鞋最齊全。"},
       {n:"2 樓 休閒服飾・籃球・游泳・健身"},
-      {n:"3 樓 足球・棒球・網球・羽球・桌球・排球",d:"每層都有用職業比賽材質做的場地，可以現場試用。"},
+      {n:"3 樓 足球・棒球・網球・羽球・桌球・排球",d:"每層都有以職業比賽規格打造的場地，可現場試用。"},
       {n:"4 樓 戶外服飾・背包・登山用品"},
-      {n:"地下 1–2 樓 高爾夫",d:"球桿、二手球桿、球鞋球袋，有大阪限定商品。"}]}},
-     {d:"營業 10:00–21:00。滿 ¥5,000（未稅）可退稅，結帳時出示護照。"}]},
- {t:"14:05",cat:"shop",n:"梅田百貨",jp:"梅田",q:"阪急うめだ本店",dur:"約 1 小時",
-  sum:"從 Alpen 走回大阪站的路上順逛，挑一兩個就好。百貨公司都有地下街相連。",
-  x:[{f:{l:"可以逛什麼",o:[
-      {n:"阪急うめだ本店",d:"地下 1 樓集中了排隊甜點名店，適合買伴手禮。",q:"阪急うめだ本店"},
-      {n:"阪神梅田本店",p:"約 ¥200",d:"地下 1 樓的「いか焼き」（花枝煎餅）是大阪人從小吃到大的點心。",q:"阪神梅田本店"},
-      {n:"LUCUA・LUCUA 1100",d:"JR 大阪站直通，日系服飾、雜貨和生活用品最齊全。",q:"LUCUA osaka"},
-      {n:"LUCUA SOUTH",d:"2026 年 4 月開幕的 LUCUA 新館（原大丸梅田 10–16 樓）。13 樓有寶可夢中心大阪和 Nintendo OSAKA。",q:"LUCUA SOUTH"}]}}]},
- {t:"15:15",cat:"tr",n:"JR 回りんくうタウン",dur:"約 1 小時 10 分鐘",price:"約 ¥1,000",
-  sum:"從 JR 大阪站搭關空快速直達，不用換車。最晚 15:30 上車，outlet 還有 3 小時。",
-  x:[{r:[["jr","大阪 → りんくうタウン，関空快速約 67 分鐘（坐 1–4 號車）"],["walk","りんくうタウン站 → outlet 約 6 分鐘"]]}]},
- {t:"16:30",cat:"shop",n:"りんくう Premium Outlets",jp:"りんくうプレミアム・アウトレット",q:"Rinku Premium Outlets",dur:"約 3.5 小時",
-  sum:"西日本最大的海邊 outlet，約 250 家店，正對關西機場。今天是 Premium Outlets Sale（11/6–11/15）最後一天。",
-  x:[{d:"一到先走到海邊的 Seaside Park（約 2 萬平方公尺草坪）看 16:53 的夕陽，對面就是關西機場和起降的飛機，再逛到 20:00 關門。"},
-     {f:{l:"可以逛什麼",o:[
-      {n:"包包配件",d:"COACH、Michael Kors、Polo Ralph Lauren、Lacoste、DIESEL 等。"},
+      {n:"地下 1–2 樓 高爾夫",d:"球桿、二手球桿、球鞋與球袋，有大阪限定商品。"}]}},
+     {d:"營業 10:00–21:00。同店滿 ¥5,000（未稅）可退稅，結帳時出示護照。"}]},
+ {t:"15:40",cat:"tr",n:"回飯店",dur:"約 1 小時 15 分鐘",price:"約 ¥1,000",
+  sum:"由 JR 大阪站搭乘關空快速直達りんくうタウン，回房間放下購物袋。",
+  x:[{r:[["walk","Alpen OSAKA → JR 大阪站 約 10 分鐘"],["jr","大阪 → りんくうタウン，関空快速約 67 分鐘（請搭 1–4 號車廂）"],["walk","りんくうタウン站 → OMO 約 1 分鐘"]]}]},
+ {t:"17:00",cat:"shop",n:"りんくう Premium Outlets",jp:"りんくうプレミアム・アウトレット",q:"Rinku Premium Outlets",dur:"約 3 小時",
+  sum:"從飯店步行約 10 分鐘。西日本最大的海邊 outlet，約 250 家店，正對關西機場；今天是 Premium Outlets Sale（11/6–11/15）最後一天。商店營業至 20:00。",
+  x:[{f:{l:"精選店家",o:[
+      {n:"包款配件",d:"COACH、Michael Kors、Polo Ralph Lauren、Lacoste、DIESEL 等。"},
       {n:"運動鞋服",d:"Nike、adidas、New Balance、PUMA、Salomon。"},
-      {n:"新進駐亮點",d:"ISSEY MIYAKE（りんくう首家）、A BATHING APE Pirate Store；TASAKI 珍珠是限期店，開到 2027 年 3 月。"},
-      {n:"戶外與生活",d:"Snow Peak（還有餐廳和露營區）、CA4LA 帽子、Francfranc 家飾。"}]}}]},
- {t:"20:00",cat:"eat",n:"晚餐",dur:"約 1 小時",sum:"outlet 餐廳營業到 21:00。飯店的 OMOダイニング 19:45 就停止點餐，今天來不及。",
-  x:[{f:{l:"選擇",o:[
-      {n:"RINKU DINING",p:"約 ¥1,000–2,000",d:"outlet 海邊區 3 樓的美食街，船艙造型，看得到大阪灣。",q:"Rinku Premium Outlets RINKU DINING"},
+      {n:"新進駐亮點",d:"ISSEY MIYAKE（りんくう首家）、A BATHING APE Pirate Store；TASAKI 珍珠為限期店，營業至 2027 年 3 月。"},
+      {n:"戶外與生活",d:"Snow Peak（另有餐廳與露營區）、CA4LA 帽子、Francfranc 家飾。"}]}},
+     {d:"海側的 Seaside Park 可眺望對岸的關西機場與起降的飛機，入夜後也很適合散步。"}]},
+ {t:"20:00",cat:"eat",n:"晚餐",dur:"約 1 小時",sum:"outlet 餐廳營業至 21:00。飯店 OMOダイニング 19:45 停止點餐，本日不建議。",
+  x:[{f:{l:"推薦餐廳",o:[
+      {n:"RINKU DINING",p:"約 ¥1,000–2,000",d:"outlet 海側 3 樓的美食街，船艙造型，可眺望大阪灣。",q:"Rinku Premium Outlets RINKU DINING"},
       {n:"てんきち",p:"約 ¥1,500–2,500",d:"飯店步行約 5 分鐘，招牌是星鰻雙吃蓋飯。",q:"てんきち りんくうタウン"}]}},
-     {d:"回房間整理行李。要退稅的商品放在好拿的地方，明天出境時海關可能要看。"}]}
+     {d:"回房間整理行李。要退稅的商品放在便於取出的位置，明天出境時海關可能要查看。"}]}
  ]},
 {iso:"2026-11-16",d:"16",dw:"一",city:"回程",title:"關西機場・回台北",
  sum:"早上 10:00 搭飯店接駁巴士到關西機場第 1 航廈，12:20 起飛。",
@@ -462,9 +453,20 @@ const DAYS=[
   x:[{d:"最後檢查：護照、退稅收據、充電器、房卡。"}]},
  {t:"09:50",cat:"tr",n:"免費接駁巴士",bd:"已預約",sum:"10:00 發車，飯店 1 樓入口的巴士站集合。",
   x:[{d:"出發前 10 分鐘到，給司機看預約信（先存截圖）。車子準時開，到 T1 約 10 分鐘。"}]},
- {t:"10:10",cat:"tr",n:"關西機場 T1",jp:"関西国際空港 第1ターミナル",q:"Kansai International Airport Terminal 1",dur:"約 2 小時",
-  sum:"先辦退稅確認，再託運行李。星宇在 T1 4 樓國際線出發大廳報到。",
-  x:[{n:"出境前先到免稅 kiosk 刷護照、給海關確認，再去託運。退款方式依店家而異，結帳時問清楚。",h:"退稅"}]},
+ {t:"10:10",cat:"tr",n:"關西機場 T1・報到出境",jp:"関西国際空港 第1ターミナル",q:"Kansai International Airport Terminal 1",dur:"約 50 分鐘",
+  sum:"先辦退稅確認，再託運行李。星宇在 T1 4 樓國際線出發大廳報到，辦完直接過安檢出境。",
+  x:[{n:"託運前先到免稅 kiosk 刷護照（或在保安檢查前用 Visit Japan Web 辦理）。綠色即完成；紅色需帶全部免稅商品到海關櫃台受檢。細節見「資訊 › 退稅」。",h:"退稅"}]},
+ {t:"11:00",cat:"shop",n:"出境後逛街・午餐",jp:"関西空港 第1ターミナル 国際線出国エリア",q:"Kansai International Airport Terminal 1",dur:"約 50 分鐘",
+  sum:"出境區於 2026 年 6 月完成改裝，約 50 家店舖。請於起飛前 30 分鐘抵達登機門。",
+  x:[{f:{l:"精選店家",o:[
+      {n:"KIX DUTY FREE",d:"過完出境就是穿越式的大型免稅店：化妝品、酒、菸和日本經典伴手禮點心。可以先上官網預訂，到專用櫃檯取貨；標「當日訂購 OK」的商品在起飛前 3 小時內還能訂。"},
+      {n:"Magnet 區（2026 年 6 月新開）",d:"約 24 家新店：日本機場第一家 Universal Studios Store、Moncler 等精品，還有松本清與 UNIQLO，適合出發前補齊藥妝與衣物。"},
+      {n:"Mood 區",d:"服飾、雜貨和伴手禮店。"}]}},
+     {f:{l:"機場餐飲",o:[
+      {n:"OnigiriBurger",b:"關西機場限定",d:"用飯糰和海苔代替麵包的漢堡，有神戶牛、豆皮、炸蝦、照燒雞口味，由大阪壽司店研發。"},
+      {n:"MENSHO",d:"拉麵，可以加 A5 和牛。"},
+      {n:"築地孫右衛門",d:"壽司和魚料理，主廚曾拿過米其林二星。"},
+      {n:"KIX BEER",d:"機場所在地泉佐野釀的精釀啤酒。"}]}}]},
  {t:"12:20",cat:"tr",n:"JX821 → 桃園",sum:"飛行 3 小時 15 分鐘，14:35（台灣時間）抵達桃園 T1。"}
  ]}
 ];
@@ -478,11 +480,10 @@ const MUST=[
   {id:"m5",n:"舊居留地十五番館的下午茶",p:"約 ¥1,500 起",w:"11/12 下午茶",d:"Salon15 TOOTH TOOTH，在百年洋館裡吃季節水果蛋糕。",q:"Salon15 TOOTH TOOTH 旧神戸居留地十五番館"}]},
  {h:"大阪",items:[
   {id:"m9",n:"丸福珈琲店 銅板鬆餅",p:"約 ¥1,500",w:"11/15 早上",d:"1934 年創業，深焙咖啡配銅板煎的鬆餅。",q:"丸福珈琲店 千日前本店"},
-  {id:"m6",n:"道頓堀 今井 きつねうどん",p:"約 ¥1,000",w:"11/15 午餐",d:"大阪代表性的豆皮烏龍麵，高湯清澈鮮甜。",q:"道頓堀 今井 本店"},
-  {id:"m7",n:"美津の 大阪燒",p:"¥1,500–2,500",w:"11/15 午餐",d:"米其林必比登推薦，山藥麵糊口感鬆軟。週日要開店前排隊。",q:"美津の 道頓堀"},
-  {id:"m8",n:"自由軒 名物カレー",p:"約 ¥1,000",w:"11/15 午餐",d:"1910 年創業，先拌好的咖哩飯中間打一顆生蛋。",q:"自由軒 難波本店"},
-  {id:"m10",n:"551 蓬萊 豚まん",p:"2 個約 ¥500",w:"11/15 午餐",d:"大阪人最愛的肉包，熱騰騰現吃最好吃。",q:"551蓬莱 本店"},
-  {id:"m11",n:"阪神梅田本店 いか焼き",p:"約 ¥200",w:"11/15 下午",d:"現烤花枝煎餅，在地下 1 樓，排隊動得很快。",q:"阪神梅田本店"}]}
+  {id:"m10",n:"551 蓬萊 豚まん",p:"2 個約 ¥500",w:"11/15 上午",d:"大阪代表性的肉包，難波本店可外帶，建議趁熱享用。",q:"551蓬莱 本店"},
+  {id:"m6",n:"きじ 大阪燒",p:"約 ¥1,000–1,800",w:"11/15 午餐",d:"梅田藍天大廈地下「滝見小路」裡的大阪燒老店。",q:"きじ 本店 滝見小路"},
+  {id:"m7",n:"はがくれ 生醬油烏龍麵",p:"約 ¥1,000–1,500",w:"11/15 午餐",d:"大阪駅前第 3 ビル地下的讚岐烏龍麵名店，麵條Ｑ彈。",q:"梅田 はがくれ 本店"},
+  {id:"m11",n:"阪神梅田本店 いか焼き",p:"約 ¥200",w:"11/15 下午",d:"地下 1 樓現烤花枝煎餅，隊伍消化快。",q:"阪神梅田本店"}]}
 ];
 const CAFES=[
  {h:"11/12 元町・舊居留地",items:[
@@ -505,12 +506,13 @@ const BUY=[
   {id:"b3",n:"ユーハイム 年輪蛋糕",d:"神戶起家的德式年輪蛋糕。",q:"ユーハイム 神戸本店"},
   {id:"b4",n:"にしむら珈琲 濾掛包",d:"¥160 起，輕巧好帶。",q:"にしむら珈琲店 中山手本店"}]},
  {h:"大阪・outlet",items:[
-  {id:"b5",n:"寶可夢中心大阪 限定商品",d:"大丸心齋橋 9 樓的 DX 店，或梅田 LUCUA SOUTH 13 樓。",q:"大丸心斎橋店"},
+  {id:"b5",n:"寶可夢中心大阪 限定商品",d:"梅田 LUCUA SOUTH 13 樓，旁邊是 Nintendo OSAKA。",q:"LUCUA SOUTH"},
   {id:"b10",n:"Alpen OSAKA 大阪限定商品",d:"高爾夫樓層有大阪限定款；跑鞋和戶外用品選擇也多。",q:"Alpen OSAKA 茶屋町"},
   {id:"b6",n:"大阪限定零食",d:"面白い恋人、大阪限定口味的 KitKat 和 Pocky，車站和機場都買得到。"},
-  {id:"b7",n:"outlet 的包包和球鞋",d:"COACH、Michael Kors、Nike、adidas、New Balance 等。",q:"Rinku Premium Outlets"}]},
+  {id:"b11",n:"關西機場 Universal Studios Store",d:"日本機場第一家，出境後的 Magnet 區，可於出發前選購環球影城周邊商品。",q:"Kansai International Airport Terminal 1"},
+  {id:"b7",n:"outlet 精品包款與球鞋",d:"COACH、Michael Kors、Nike、adidas、New Balance 等。",q:"Rinku Premium Outlets"}]},
  {h:"藥妝",items:[
-  {id:"b8",n:"眼藥水、痠痛貼布、護唇膏等常備品",d:"心齋橋筋和三宮センター街藥妝店最多，可以比價。"}]}
+  {id:"b8",n:"眼藥水、痠痛貼布、護唇膏等常備品",d:"三宮センター街、難波和梅田的藥妝店都多，可以比價；退稅商品出境前不要拆封。"}]}
 ];
 
 const PLACES=[
@@ -533,15 +535,15 @@ const PLACES=[
   ["花鳥風月（神戶牛鐵板燒）","花鳥風月","花鳥風月 神戸牛 和 鉄板焼 三宮","11/14"],
   ["Steakland 神戶館","ステーキランド神戸館","ステーキランド神戸館","11/14"],
   ["布引纜車 山麓站","ハーブ園山麓駅","神戸布引ハーブ園 ハーブ園山麓駅","11/14"]]},
- {h:"大阪・難波／心齋橋",list:[
+ {h:"大阪・難波",list:[
   ["丸福珈琲店 千日前本店","丸福珈琲店","丸福珈琲店 千日前本店","11/15"],
-  ["心齋橋筋商店街","心斎橋筋商店街","Shinsaibashi-suji Shopping Street","11/15"],
-  ["大丸心齋橋店","大丸心斎橋店","大丸心斎橋店","11/15"],
-  ["心齋橋 PARCO","心斎橋PARCO","心斎橋PARCO","11/15"],
-  ["道頓堀 今井","道頓堀今井","道頓堀 今井 本店","11/15"],
-  ["美津の","美津の","美津の 道頓堀","11/15"],
+  ["髙島屋大阪店","髙島屋大阪店","Takashimaya Osaka","11/15"],
+  ["なんばパークス","なんばパークス","Namba Parks","11/15"],
+  ["なんばCITY","なんばCITY","なんばCITY","11/15"],
   ["551 蓬萊 本店","551蓬莱","551蓬莱 本店","11/15"]]},
  {h:"大阪・梅田",list:[
+  ["きじ 本店（午餐）","きじ 滝見小路","きじ 本店 滝見小路","11/15"],
+  ["梅田 はがくれ（午餐）","はがくれ 大阪駅前第3ビル","梅田 はがくれ 本店","11/15"],
   ["Alpen OSAKA","ヤンマー フライングYビル（茶屋町）","Alpen OSAKA 茶屋町","11/15"],
   ["阪急うめだ本店","阪急うめだ本店","阪急うめだ本店","11/15"],
   ["阪神梅田本店","阪神梅田本店","阪神梅田本店","11/15"],
@@ -567,17 +569,19 @@ const MALLS=[
   {n:"Mint 神戶",a:"JR 三ノ宮站旁",w:"11/12・11/14",d:"地下 1 樓到 9 樓：服飾、化妝品、家居、美食和電影院，走成熟大人路線；1 樓是三宮巴士總站。",q:"ミント神戸"},
   {n:"三宮 OPA",a:"三宮センター街",w:"11/12",d:"就在商店街上，附近學校多，以年輕人的服飾和雜貨為主。11:00–21:00。另有三宮 OPA2，在三宮站東側的雲井通。",q:"三宮オーパ"},
   {n:"さんちか",a:"三宮地下街",w:"11/12・11/14",d:"直通各線三宮站的地下街，下雨天也好逛。",q:"さんちか"}]},
- {h:"大阪・心齋橋",items:[
-  {n:"大丸心齋橋店",a:"心齋橋筋",w:"11/15",d:"Vories 設計的 Art Deco 建築，2019 年改建時保留了外牆和內裝。本館 9 樓是寶可夢中心大阪 DX，寶可夢咖啡廳要先上網預約；地下樓層有甜點和熟食。",q:"大丸心斎橋店"},
-  {n:"心齋橋 PARCO",a:"大丸心齋橋旁",w:"11/15",d:"2026 年大改裝：西日本最大的 Disney Store、JORDAN「World of Flight Osaka」、Goldwin、TAMBURINS、Vans。",q:"心斎橋PARCO"}]},
+ {h:"大阪・難波",items:[
+  {n:"髙島屋大阪店",a:"南海なんば站直通",w:"11/15",d:"大阪南區的老牌百貨。地下食品樓層的甜點與伴手禮齊全，也有精品與化妝品。",q:"Takashimaya Osaka"},
+  {n:"なんばパークス",a:"南海なんば站南側",w:"11/15",d:"服飾、雜貨與生活用品為主的商場；頂樓是階梯式空中花園，適合雨停後散步。",q:"Namba Parks"},
+  {n:"なんばCITY",a:"南海なんば站樓下",w:"11/15",d:"分本館與南館，以服飾、雜貨和餐廳為主，與車站直通。",q:"なんばCITY"}]},
  {h:"大阪・梅田",items:[
   {n:"阪急うめだ本店",a:"阪急大阪梅田站",w:"11/15",d:"話題甜點最多的百貨，地下 1 樓排隊名店集中，適合買新奇的伴手禮。10:00–20:00；12–13 樓餐廳開到 22:00。",q:"阪急うめだ本店"},
   {n:"阪神梅田本店",a:"JR 大阪站步行 2 分鐘",w:"11/15",d:"以美食出名，地下食品樓層和美食區是梅田最強的；大阪人從小吃到大的いか焼き就在這裡。",q:"阪神梅田本店"},
   {n:"LUCUA・LUCUA 1100",a:"JR 大阪站直通",w:"11/15",d:"日系服飾、雜貨和生活用品，適合慢慢挑平價日系品牌。",q:"LUCUA osaka"},
   {n:"LUCUA SOUTH・大丸梅田店",a:"JR 大阪站南側",w:"11/15",d:"10–16 樓是 2026 年 4 月開幕的 LUCUA SOUTH，13 樓有寶可夢中心大阪和 Nintendo OSAKA；低樓層仍是大丸梅田店，地下 1 樓的ウメダチーズラボ（起司甜點）很受歡迎。",q:"LUCUA SOUTH"},
   {n:"Alpen OSAKA",a:"茶屋町",w:"11/15",d:"2026 年 8 月開幕的運動用品旗艦店，6 層樓：跑鞋、球類、戶外和高爾夫，每層都有試用場地。10:00–21:00。",q:"Alpen OSAKA 茶屋町"}]},
- {h:"りんくう",items:[
-  {n:"りんくう Premium Outlets",a:"飯店步行約 10 分鐘",w:"11/15",d:"西日本最大的海邊 outlet，約 250 家店，正對關西機場。包包配件、運動鞋服、戶外和生活用品都有；11/6–11/15 是年度特賣。商店 10:00–20:00，餐廳到 21:00。",q:"Rinku Premium Outlets"}]}
+ {h:"りんくう・關西機場",items:[
+  {n:"りんくう Premium Outlets",a:"飯店步行約 10 分鐘",w:"11/15",d:"西日本最大的海邊 outlet，約 250 家店，正對關西機場。包包配件、運動鞋服、戶外和生活用品都有；11/6–11/15 是年度特賣。商店 10:00–20:00，餐廳到 21:00。",q:"Rinku Premium Outlets"},
+  {n:"關西機場 T1 出境區",a:"國際線出境後",w:"11/16",d:"2026 年 6 月改裝完成，約 50 家店：大型免稅店 KIX DUTY FREE（可網路預訂取貨）、日本機場第一家 Universal Studios Store、Moncler、松本清、UNIQLO。吃的有機場限定的 OnigiriBurger。",q:"Kansai International Airport Terminal 1"}]}
 ];
 
 const TAXI=[
@@ -586,19 +590,6 @@ const TAXI=[
  {z:"11/13 會場",jp:"神戸大学 六甲台第1キャンパスの正門までお願いします。第二学舎に行きます。",ad:"神戸市灘区六甲台町2-1"},
  {z:"11/14 纜車",jp:"布引ハーブ園のロープウェイ山麓駅までお願いします。",ad:"新神戸駅のそば"},
  {z:"11/14–16 飯店（りんくう）",jp:"OMO関西空港 by 星野リゾートまでお願いします。",ad:"大阪府泉佐野市りんくう往来北1-833"}
-];
-
-const CHECK=[
- ["teppan","訂 11/14 中午的神戶牛鐵板燒"],
- ["vjw","Visit Japan Web 填好入境與海關，QR code 截圖"],
- ["ic","iPhone 錢包加 Suica 或 ICOCA，儲值 ¥3,000–5,000"],
- ["esim","網卡或 eSIM 設定好"],
- ["cash","準備日幣現金（南京町小吃多收現金）"],
- ["slides","簡報 PDF 存在隨身碟和雲端，帶 USB-C／HDMI 轉接頭"],
- ["namecard","名片"],
- ["umb","折疊傘（11/15 上午有雨）"],
- ["omo","OMO 11/16 10:00 接駁巴士預約信截圖"],
- ["tax","退稅商品出境前先到 kiosk 確認，再託運"]
 ];
 
 /* ═══════════ STATE ═══════════ */
@@ -611,12 +602,12 @@ function jst(){
 }
 let NOW=jst();
 let todayIdx=DAYS.findIndex(d=>d.iso===NOW.date);
-const TABS=["plan","food","places","info","tools"];
-let tab=load("tab","plan"); if(!TABS.includes(tab))tab="plan";
+const TABS=["plan","food","places","info"];
+let tab=load("tab","plan"); if(tab==="tools"){tab="info";save("infoSub","rate")} if(!TABS.includes(tab))tab="plan";
 let sel=todayIdx>=0?todayIdx:Math.min(Math.max(load("day",0)|0,0),DAYS.length-1);
 let foodSub=load("foodSub","must"); if(!["must","cafe","buy"].includes(foodSub))foodSub="must";
 let placeSub=load("placeSub","mall"); if(!["mall","map"].includes(placeSub))placeSub="mall";
-let infoSub=load("infoSub","stay"); if(!["stay","move","taxi","tax","sos"].includes(infoSub))infoSub="stay";
+let infoSub=load("infoSub","stay"); if(!["stay","move","taxi","tax","sos","rate"].includes(infoSub))infoSub="stay";
 const open=new Set();
 let rate=+load("rate",0.213)||0.213, amt=+load("amt",1000)||0, dir=load("dir","jpy");
 
@@ -663,11 +654,11 @@ function viewPlan(){
       <div class="fact"><div class="k">節奏</div><div class="v">${d.pace[0]}<small>${d.pace[1]}</small></div></div>
     </div></div>`;
   const anyOpen=d.items.some((it,i)=>it.x&&open.has(sel+"-"+i));
-  const bar=`<div class="bar g"><span class="bl">天氣：tenki.jp 11/11 預報</span><button class="linkbtn" data-act="all">${anyOpen?"全部收合 −":"全部展開 ＋"}</button></div>`;
+  const bar=`<div class="bar g"><button class="linkbtn" data-act="all">${anyOpen?"全部收合 −":"全部展開 ＋"}</button></div>`;
   const tl=`<div class="tl g">${d.items.map((it,i)=>{
     const key=sel+"-"+i, isOpen=open.has(key), C=CAT[it.cat]||CAT.tr;
     const durTxt=it.dur?`${it.cat==="tr"?"車程":"停留"} ${it.dur}`:(it.tz||"");
-    return `<div class="it${i===ni?" now":""}" style="--c:var(${C[1]})">
+    return `<div class="it${i===ni?" now":""}">
       <div class="tcol"><div class="tm">${it.t}</div>${i===ni?'<span class="nw">現在</span>':""}</div>
       <div class="body">
         <div class="cat"><span>${C[0]}</span>${durTxt?`<span class="du">${durTxt}</span>`:""}${it.q?`<a class="mp" href="${gm(it.q)}" target="_blank" rel="noopener">地圖 ↗</a>`:""}</div>
@@ -678,7 +669,7 @@ function viewPlan(){
         ${it.talks?talksHtml(it.talks):""}
         ${it.x?`<button class="more" data-act="toggle" data-key="${key}" aria-expanded="${isOpen}">${isOpen?"收合 −":"展開 ＋"}</button>`:""}
         ${it.x&&isOpen?`<div class="x">${it.x.map(block).join("")}</div>`:""}
-      </div></div>`}).join("")}</div>`;
+      </div></div>`}).join("")}</div><div class="tfoot g">天氣為 tenki.jp 11/11 發布的神戶預報。</div>`;
   return days+head+bar+tl;
 }
 
@@ -690,7 +681,7 @@ function viewFood(){
   const st=subtabs([["must","必吃"],["cafe","咖啡廳"],["buy","必買"]],foodSub,"food");
   let h="";
   if(foodSub==="must"){
-    h=`<section class="sec g"><h3>沒吃到會後悔</h3><div class="lead">挑選標準：在地老店、評價穩定，而且排得進這次的行程。</div>`+
+    h=`<section class="sec g"><h3>必吃清單</h3><div class="lead">挑選標準：在地老店、評價穩定，而且排得進這次的行程。</div>`+
       MUST.map(s=>`<div class="grp" style="margin-top:16px">${s.h}</div><div class="list">${s.items.map(foodRow).join("")}</div>`).join("")+`</section>`;
   }else if(foodSub==="cafe"){
     h=`<section class="sec g"><h3>咖啡廳</h3><div class="lead">依天數整理，都在當天的路線上。</div>`+
@@ -714,12 +705,12 @@ function viewPlaces(){
 }
 
 function viewInfo(){
-  const st=subtabs([["stay","航班住宿"],["move","交通"],["taxi","計程車"],["tax","退稅"],["sos","緊急"]],infoSub,"info");
+  const st=subtabs([["stay","航班住宿"],["move","交通"],["taxi","計程車"],["rate","匯率"],["tax","退稅"],["sos","緊急"]],infoSub,"info");
   let h="";
   if(infoSub==="stay"){
     h=`<section class="sec g"><h3>航班</h3>
-      <dl class="kv"><dt>去程</dt><dd><span class="big">JX1834</span><br>11/12（四）08:20 桃園 T1 → 11:45 神戶 T2<br>飛行 2 小時 25 分鐘・託運 1 件</dd></dl>
-      <dl class="kv" style="margin-top:14px"><dt>回程</dt><dd><span class="big">JX821</span><br>11/16（一）12:20 關西 T1 → 14:35 桃園 T1<br>飛行 3 小時 15 分鐘・託運 1 件</dd></dl></section>
+      <dl class="kv"><dt>去程</dt><dd><span class="big">JX1834</span>　11/12（四）<br>08:20 台灣桃園 T1 → 11:45 神戶機場 T2<br>星宇航空・飛行 2 小時 25 分鐘・經濟艙・託運 1 件</dd></dl>
+      <dl class="kv" style="margin-top:14px"><dt>回程</dt><dd><span class="big">JX821</span>　11/16（一）<br>12:20 關西機場 T1 → 14:35 台灣桃園 T1<br>星宇航空・飛行 3 小時 15 分鐘・經濟艙・託運 1 件</dd></dl></section>
     <section class="sec g"><h3>remm plus 神戶三宮</h3><div class="lead"><span lang="ja">レムプラス神戸三宮</span>・<span lang="ja">神戸市中央区加納町4-2-1</span></div>
       <div class="cico"><div><div class="l">入住 11/12</div><div class="v">14:00</div></div><div><div class="l">退房 11/14</div><div class="v">12:00</div></div></div>
       <div class="desc" style="margin-top:10px">2 晚。阪急神戶三宮站東口 2 樓直通，JR 三ノ宮站西口旁。11/14 退房後可以寄放行李。 ${mapA("remm plus Kobe Sannomiya")}</div></section>
@@ -731,25 +722,46 @@ function viewInfo(){
         <div class="row"><div class="row-t"><div class="rn">OMOダイニング（21 樓）</div><div class="rd">早餐 buffet 06:00–10:00（09:30 最後入場），約 ¥2,500。晚餐單點約 ¥2,000 起；10/5–12/3 縮短為 18:00–20:00（19:45 最後點餐），菜單較少。</div></div></div>
         <div class="row"><div class="row-t"><div class="rn">22 樓酒吧</div><div class="rd">18:00–22:00（21:45 最後點餐），只有下酒菜。</div></div></div></div></section>`;
   }else if(infoSub==="move"){
-    h=`<section class="sec g"><h3>交通小抄</h3><div class="list">
-      <div class="row"><div class="row-t"><div class="rn">一張 IC 卡就夠</div><div class="rd">iPhone 錢包加 Suica 或 ICOCA，Port Liner、阪急、JR、南海、地鐵、公車都能用。</div></div></div>
-      <div class="row"><div class="row-t"><div class="rn">三宮有好幾個車站</div><div class="rd">阪急「神戶三宮」（飯店直通）、JR「三ノ宮」、地鐵「三宮」名稱不同，但都在附近；Port Liner 的三宮站在 JR 東口上方。</div></div></div>
-      <div class="row"><div class="row-t"><div class="rn">關空快速坐 1–4 號車</div><div class="rd">從大阪出發時和紀州路快速連在一起，5–8 號車會在日根野分開去和歌山。</div></div></div>
-      <div class="row"><div class="row-t"><div class="rn">南海空港急行不用加價</div><div class="rd">りんくうタウン到難波 ¥820，約 49 分鐘。rapi:t 比較快，但要另外買特急券。</div></div></div>
+    h=`<section class="sec g"><h3>交通須知</h3><div class="list">
+      <div class="row"><div class="row-t"><div class="rn">IC 卡</div><div class="rd">iPhone 錢包加 Suica 或 ICOCA，Port Liner、阪急、JR、南海、地鐵、公車都能用。</div></div></div>
+      <div class="row"><div class="row-t"><div class="rn">三宮的車站</div><div class="rd">阪急「神戶三宮」（飯店直通）、JR「三ノ宮」、地鐵「三宮」名稱不同，但都在附近；Port Liner 的三宮站在 JR 東口上方。</div></div></div>
+      <div class="row"><div class="row-t"><div class="rn">關空快速請搭 1–4 號車廂</div><div class="rd">從大阪出發時和紀州路快速連在一起，5–8 號車會在日根野分開去和歌山。</div></div></div>
+      <div class="row"><div class="row-t"><div class="rn">南海空港急行</div><div class="rd">りんくうタウン到難波 ¥820，約 49 分鐘。rapi:t 較快，需另購特急券。</div></div></div>
       <div class="row"><div class="row-t"><div class="rn">御堂筋線（紅色）</div><div class="rd">心齋橋、難波、梅田都在這條線上。</div></div></div></div></section>
       <section class="sec g"><h3>主要路線</h3><div class="list">
       ${[["11/12","神戶機場 → 三宮","T2 步行約 10 分鐘到站，Port Liner 約 18 分鐘・¥340"],["11/13","三宮 → 神戶大學","阪急到六甲約 8 分鐘，再搭公車或計程車約 10 分鐘"],["11/14","三宮 → 新神戶","神戶地鐵 1 站約 2 分鐘"],["11/14","三宮 → りんくうタウン","機場巴士到關西機場 T1 約 65 分鐘・¥2,200，再搭電車一站・¥370（備案：JR 約 1 小時 40 分鐘・約 ¥1,600）"],["11/15","りんくうタウン → 難波","南海空港急行約 49 分鐘・¥820"],["11/15","難波 → 梅田","御堂筋線約 8 分鐘・¥240"],["11/15","大阪 → りんくうタウン","JR 關空快速約 67 分鐘・約 ¥1,000"],["11/16","OMO → 關西機場 T1","飯店接駁巴士 10:00 發車・約 10 分鐘"]].map(([d,a,b])=>`<div class="row"><div class="row-t"><div class="rn">${a}</div><div class="rd">${b}</div></div><span class="rday">${d}</span></div>`).join("")}</div></section>`;
+  }else if(infoSub==="rate"){
+    return st+viewRate();
   }else if(infoSub==="taxi"){
-    h=`<section class="sec g"><h3>給司機看</h3><div class="lead">把手機拿給計程車司機看，或複製地址貼到 Google 地圖。</div>
+    h=`<section class="sec g"><h3>日文地址卡</h3><div class="lead">出示給計程車司機，或複製地址至 Google 地圖。</div>
       ${TAXI.map(t=>`<div class="taxi"><div class="tz">${t.z}</div><div class="jpl" lang="ja">${t.jp}</div><div class="ad" lang="ja">${t.ad}</div><button class="copy" data-act="copy" data-text="${esc(t.ad)}">複製地址</button></div>`).join("")}</section>`;
   }else if(infoSub==="tax"){
-    h=`<section class="sec g"><h3>退稅新制</h3><div class="lead">2026 年 11 月 1 日起改為「先付稅、出境後退」。</div>
+    h=`<section class="sec g"><h3>退稅新制</h3><div class="lead">2026 年 11 月 1 日起的購買適用「リファンド方式」：結帳時先付含稅價格，出境時經海關確認後，才退回消費稅。</div>
+      <div class="grp">基本規則</div>
+      <div class="list">
+        <div class="row"><div class="row-t"><div class="rn">門檻</div><div class="rd">同一家店、同一天買滿 ¥5,000（未稅）。使用共同退稅櫃台的商場，同一天在多家店的消費可以合併計算。</div></div></div>
+        <div class="row"><div class="row-t"><div class="rn">取消的限制</div><div class="rd">不再區分消耗品與一般商品，也不再需要特殊包裝；數量以能隨身帶出境為限。</div></div></div>
+        <div class="row"><div class="row-t"><div class="rn">期限</div><div class="rd">購買日起 90 天內，出境時完成海關確認。</div></div></div></div>
+      <div class="grp">結帳時</div>
       <div class="ol">
-        <div>在免稅店結帳時先付含稅價格，出示護照登記。</div>
-        <div>出境時到機場的免稅手續 kiosk 刷護照，接受海關確認，可能要看商品。</div>
-        <div>確認後由店家或代辦業者退回消費稅。退款方式依店家而異，結帳時問清楚。</div>
-        <div>同一家店同一天買滿 ¥5,000（未稅）才適用；在日本吃掉或用掉的商品不能退。</div></div>
-      <div class="note" style="margin-top:14px"><b>注意</b>退稅商品放在託運行李的話，要先到 kiosk 確認，再去託運。</div></section>`;
+        <div>出示護照正本，付含稅價格。</div>
+        <div>當場登記退款方式（信用卡、電子支付等，依店家而定），並確認是否收手續費。</div>
+        <div>收好收據。海關以「一張收據」為單位確認。</div></div>
+      <div class="grp" style="margin-top:20px">出境時（11/16 關西機場 T1）</div>
+      <div class="ol">
+        <div>到國際線出發大廳，在託運行李之前，到免稅手續 kiosk 刷護照；關西機場也可以在保安檢查前用 Visit Japan Web 線上辦理。</div>
+        <div>螢幕顯示綠色：完成，可以去託運。顯示紅色：帶著所有免稅商品到旁邊的海關櫃台受檢。</div>
+        <div>確認完成後，由店家或退稅代辦業者把消費稅退到登記的帳戶。</div></div>
+      <div class="note" style="margin-top:14px"><b>注意</b>先託運再辦理不行，託運的行李也不能拿回來。必須在登機手續前完成；因辦理退稅而誤機，航空公司與海關都不負責。</div>
+      <div class="grp" style="margin-top:20px">拿不到退款的情況</div>
+      <div class="list">
+        <div class="row"><div class="row-t"><div class="rn">收據上少了任何一件</div><div class="rd">同一張收據的商品只要有一件不在身上（吃掉、用掉、送人或遺失），整張收據都不退。</div></div></div>
+        <div class="row"><div class="row-t"><div class="rn">消耗品拆封使用</div><div class="rd">化妝品、食品、藥品出境前不要拆封；已在日本使用的要主動告知海關，不能辦理。</div></div></div>
+        <div class="row"><div class="row-t"><div class="rn">沒有完成確認</div><div class="rd">超過 90 天，或登機前來不及完成。</div></div></div></div>
+      <div class="grp" style="margin-top:20px">退款與手續費</div>
+      <div class="desc" style="margin-top:6px">退款方式、入帳時間與手續費依店家或代辦業者而定。多數店家標示手續費 ¥0，但在機場領現金時，代辦業者可能收取手續費。</div>
+      <div class="grp" style="margin-top:20px">這次行程的建議</div>
+      <div class="desc" style="margin-top:6px">退稅商品和收據集中放在同一個袋子；11/16 到 T1 先辦 kiosk、再去星宇櫃台託運，預留 15–20 分鐘。</div></section>`;
   }else{
     h=`<section class="sec g"><h3>緊急聯絡</h3><div class="list" style="border-top:0">
       ${[["警察","110"],["救護車・消防","119"],["訪日外國人熱線（JNTO，24 小時，可說中文）","050-3816-2787"],["駐大阪辦事處 急難救助（日本境內撥打）","090-8794-4568"],["駐大阪辦事處（上班時間）","06-6227-8623"]].map(([n,t])=>`<div class="tel"><div class="row-t"><div class="rd" style="margin:0">${n}</div><div class="tn">${t}</div></div><button class="copy" data-act="copy" data-text="${t}">複製</button></div>`).join("")}</div></section>`;
@@ -762,7 +774,7 @@ function convResult(){
   return {v:yen(rate?amt/rate:0),s:`NT$ ${amt.toLocaleString("en-US")} ÷ ${rate}`};
 }
 function quickRows(){return [100,500,1000,2000,3000,5000,10000,20000].map(n=>`<div><span>${yen(n)}</span><span>${ntd(n*rate)}</span></div>`).join("")}
-function viewTools(){
+function viewRate(){
   const r=convResult();
   return `<section class="sec g"><h3>匯率換算</h3><div class="conv">
     <div class="cv-row"><label for="rate">匯率</label><span class="unit">¥1 =</span><input class="cv-in sm" id="rate" type="number" inputmode="decimal" step="0.001" value="${rate}"><span class="unit">NT$</span></div>
@@ -771,18 +783,14 @@ function viewTools(){
     <div class="result"><div class="rl">換算結果</div><div class="rv" id="rv">${r.v}</div><div class="rl" id="rs">${r.s}</div></div>
     <div class="qt" id="qt">${quickRows()}</div>
     <div class="hint">預設 0.213 是臺灣銀行 11 月初的日幣現金賣出匯率。可以改成你換匯或刷卡的匯率，會記在這支手機上。</div>
-  </div></section>
-  <section class="sec g"><h3>出發前清單</h3><div class="list">
-    ${CHECK.map(([id,t])=>`<div class="row"><div class="row-t"><div class="rd" style="margin:0;color:var(--ink);font-size:15px">${t}</div></div></div>`).join("")}</div></section>
-  <div class="foot g">退稅門檻：同一家店同一天 ¥5,000（未稅）以上。</div>`;
+  </div></section><div class="foot g">退稅門檻：同一家店同一天 ¥5,000（未稅）以上。</div>`;
 }
-
 /* ═══════════ RENDER ═══════════ */
 function render(){
   document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.tab===tab)));
   const v=document.getElementById("view");
   v.setAttribute("aria-labelledby","tab-"+tab);
-  v.innerHTML=tab==="plan"?viewPlan():tab==="food"?viewFood():tab==="places"?viewPlaces():tab==="info"?viewInfo():viewTools();
+  v.innerHTML=tab==="plan"?viewPlan():tab==="food"?viewFood():tab==="places"?viewPlaces():viewInfo();
 }
 /* re-render, then put focus back on the control that was used */
 function rr(el){
