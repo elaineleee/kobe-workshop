@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
 <meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-title" content="神戶・大阪">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#3b2a22">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="apple-touch-icon.png">
 </head>
 <body>
 <title>神戶・大阪 2026</title>
@@ -63,7 +68,7 @@ h1{font-family:var(--f-serif);font-weight:700;font-size:var(--fs-h1);letter-spac
 .fl-dir{font-size:var(--fs-cap);color:var(--on-brand-dim)}
 .fl-route{font-family:var(--f-num);font-size:27px;font-weight:600;letter-spacing:.05em;line-height:1.25;margin-top:2px;font-variant-numeric:lining-nums}
 .fl-route span{font-size:17px;opacity:.65;margin:0 4px}
-.fl-time{font-family:var(--f-num);font-size:18px;font-weight:600;letter-spacing:.02em;font-variant-numeric:lining-nums}
+.fl-time{font-family:var(--f-num);font-size:16.5px;font-weight:600;letter-spacing:0;white-space:nowrap;font-variant-numeric:lining-nums}
 .fl-meta{font-size:var(--fs-cap);color:var(--on-brand-dim);line-height:1.6}
 
 /* tabs */
@@ -115,7 +120,7 @@ h1{font-family:var(--f-serif);font-weight:700;font-size:var(--fs-h1);letter-spac
 .jp{font-size:var(--fs-cap);color:var(--muted);line-height:1.5}
 .sm{color:var(--ink-2);margin-top:4px}
 .pr{font-size:var(--fs-sm);color:var(--ink-2);margin-top:2px}
-.more{appearance:none;border:0;background:none;color:var(--link);font-size:var(--fs-sm);padding:6px 0 0;cursor:pointer}
+.more{appearance:none;border:0;background:none;color:var(--link);font-size:20px;line-height:1;padding:8px 16px 4px 0;cursor:pointer}
 .x{display:flex;flex-direction:column;gap:12px;margin-top:10px}
 .desc{font-size:var(--fs-sm);line-height:1.85;color:var(--ink)}
 .note{font-size:var(--fs-sm);line-height:1.75;background:var(--surface-2);border-radius:6px;padding:8px 12px}
@@ -246,34 +251,33 @@ const CAT={eat:["美食","--sel"],cafe:["咖啡","--sel"],go:["景點","--sel"],
 
 const DAYS=[
 {iso:"2026-11-12",d:"12",dw:"四",city:"神戶",title:"抵達神戶・元町與港邊",
- sum:"中午抵達。下午從南京町吃到舊居留地，在百年洋館喝下午茶，傍晚到海邊看夕陽，晚上吃燒肉。",
+ sum:"中午抵達，在三宮吃和牛漢堡排；下午逛舊居留地，在百年洋館喝下午茶，傍晚到海邊看夕陽，晚上吃燒肉。",
  wx:["晴時多雲","12–19°","降雨 30%"],stay:["remm plus 神戶三宮","第 1 晚"],pace:["適中","日落 16:57"],
  items:[
  {t:"06:20",cmp:"07:20",tz:"台灣時間",cat:"tr",n:"桃園機場 T1 報到",sum:"星宇 JX1834 08:20 起飛。託運 1 件，飛行 2 小時 25 分鐘，日本比台灣快 1 小時。"},
- {t:"11:45",cat:"tr",n:"抵達神戶機場 → 三宮",jp:"神戸空港 第2ターミナル",q:"Kobe Airport Terminal 2",dur:"約 1.5 小時",price:"Port Liner ¥340",
-  sum:"入境後搭乘 Port Liner 至三宮，先將行李寄放於飯店。",
-  x:[{r:[["walk","第 2 航廈 → Port Liner 神戸空港站 約 10 分鐘（或搭免費循環巴士）"],["port","神戸空港 → 三宮（終點站）約 18 分鐘，5–10 分鐘一班"],["walk","三宮站 → remm plus 約 5 分鐘"]]},
-     {d:"第 2 航廈是 2025 年啟用的國際線航廈，規模小，入境約 30–45 分鐘。飯店 14:00 才能入住，先在櫃檯寄放行李。"}]},
- {t:"13:45",cat:"eat",n:"南京町 午餐",jp:"南京町",q:"Nankinmachi Kobe",dur:"約 45 分鐘",price:"¥1,000–2,000",
-  sum:"神戶中華街。從飯店沿有屋頂的商店街步行約 15 分鐘，建議品嚐 2–3 樣小吃。",
-  x:[{f:{l:"推薦店家",o:[
-      {n:"老祥記",p:"豚饅 ¥120／個",b:"必吃",d:"1915 年創業的肉包老店。本店 11/11 改建後重新開幕；排隊超過 20 分鐘可改選其他店家。",q:"老祥記 南京町"},
-      {n:"元祖ぎょうざ苑",p:"約 ¥1,000",d:"以味噌醬佐食的煎餃，店內設有座位。",q:"元祖ぎょうざ苑"},
-      {n:"YUNYUN",p:"約 ¥600",d:"煎小籠包，適合外帶。",q:"YUNYUN 南京町"}]}}]},
- {t:"14:30",cat:"shop",n:"舊居留地・大丸神戶店",jp:"旧居留地・大丸神戸店",q:"Daimaru Kobe",dur:"約 40 分鐘",
-  sum:"緊鄰南京町。明治時期的外國人居留地，石造洋館內進駐精品與選物店。",
+ {t:"11:45",cat:"tr",n:"抵達神戶機場・入境",jp:"神戸空港 第2ターミナル",q:"Kobe Airport Terminal 2",dl:"入境約 30–45 分鐘",
+  sum:"第 2 航廈是 2025 年啟用的國際線航廈，規模小，入境、領行李與海關通常 30–45 分鐘。"},
+ {t:"12:30",cat:"tr",n:"Port Liner → 三宮・寄放行李",jp:"ポートライナー 神戸空港駅 → 三宮駅",q:"Port Liner Kobe Airport Station",dur:"約 35 分鐘",price:"Port Liner ¥340",
+  sum:"從航廈走到 Port Liner 站，坐到終點三宮，再走到飯店寄放行李（14:00 才能入住）。",
+  x:[{r:[["walk","第 2 航廈 → Port Liner 神戸空港站 約 10 分鐘（或搭免費循環巴士）"],["port","神戸空港 → 三宮（終點站）約 18 分鐘，5–10 分鐘一班"],["walk","三宮站 → remm plus 約 5 分鐘"]]}]},
+ {t:"13:15",cat:"eat",n:"神戶赤ふじ 午餐",jp:"神戸赤ふじ ハンバーグと牛タンとお米 ミント神戸店",q:"神戸赤ふじ ハンバーグと牛タンとお米 ミント神戸店",dur:"約 1 小時",price:"漢堡排 100 g ¥1,320／170 g ¥1,870",
+  sum:"Mint 神戶 7 樓，從飯店步行約 3 分鐘。黑毛和牛漢堡排在自己的小鐵板上煎，白飯可免費續碗。",
+  x:[{d:"平日 11:00–15:30（最後點餐 14:30）。黑毛和牛漢堡排 100 g ¥1,320、170 g ¥1,870、210 g ¥2,310；也有牛舌。最後可選大蒜炒飯、鰻魚飯三吃風格的「ひつまぶし」或生蛋拌飯收尾。"},
+     {d:"南京町就在舊居留地旁，想吃老祥記豚饅（¥120）可順路外帶。"}]},
+{t:"14:30",cat:"shop",n:"舊居留地・大丸神戶店",jp:"旧居留地・大丸神戸店",q:"Daimaru Kobe",dur:"約 45 分鐘",
+  sum:"從 Mint 神戶步行約 15 分鐘，緊鄰南京町。明治時期的外國人居留地，石造洋館內進駐精品與選物店。",
   x:[{f:{l:"精選店家",o:[
       {n:"大丸神戶店",d:"地下 1 樓食品館可以先看伴手禮，神戸フランツ、ユーハイム、モロゾフ都是神戶起家的品牌。百貨外圍的石造迴廊是神戶最經典的街景。",q:"Daimaru Kobe"},
       {n:"舊居留地街區",d:"沿著棋盤狀街道散步，看石造洋館改建的精品店。神戶市立博物館的希臘式柱廊建築也在這一區。",q:"Kobe City Museum"},
       {n:"乙仲通（時間充裕時）",d:"往西南走 5 分鐘，老大樓裡藏著雜貨、古董和小咖啡店，例如乙仲アパートメント。",q:"乙仲通 神戸"}]}}]},
- {t:"15:10",cat:"cafe",n:"Salon15 TOOTH TOOTH 下午茶",jp:"Salon15 TOOTH TOOTH 旧神戸居留地十五番館",q:"Salon15 TOOTH TOOTH 旧神戸居留地十五番館",dur:"約 1.5 小時",price:"蛋糕＋紅茶約 ¥1,500–2,500",
+ {t:"15:15",cat:"cafe",n:"Salon15 TOOTH TOOTH 下午茶",jp:"Salon15 TOOTH TOOTH 旧神戸居留地十五番館",q:"Salon15 TOOTH TOOTH 旧神戸居留地十五番館",dur:"約 1.5 小時",price:"蛋糕＋紅茶約 ¥1,500–2,500",
   sum:"位於 1880 年代建造的舊居留地十五番館，是這一帶最具氛圍的茶沙龍。預留一個半小時，從容享用下午茶。",
   x:[{d:"2024 年改裝成甜點與紅茶沙龍。有季節水果下午茶，也賣自家烘焙點心和自家調配的紅茶。"},
      {d:"營業 11:00–20:00，不定休，電話 078-332-1515。完整的下午茶套餐建議先訂位，只吃蛋糕可以直接去。"},
      {f:{l:"附近咖啡廳",o:[
       {n:"エビアンコーヒー",p:"約 ¥600–1,200",d:"元町站旁的老派喫茶店，自家烘焙咖啡配戚風蛋糕或「神戸ハイカラプリン」。營業 08:30–18:30。",q:"エビアンコーヒー 元町"},
       {n:"tea room mahisa 元町店",p:"約 ¥1,200–2,000",d:"大丸神戶旁的紅茶專門店，司康和起司塔很受歡迎。",q:"tea room mahisa 元町店"}]}}]},
- {t:"16:45",cat:"go",n:"美利堅公園 看夕陽",jp:"メリケンパーク",q:"Meriken Park Kobe",dur:"約 40 分鐘",
+ {t:"16:50",cat:"go",n:"美利堅公園 看夕陽",jp:"メリケンパーク",q:"Meriken Park Kobe",dur:"約 40 分鐘",
   sum:"BE KOBE 地標與紅色神戶港塔，16:57 日落。",
   x:[{r:[["walk","舊居留地 → 美利堅公園 約 10 分鐘"]]},
      {d:"想上港塔：展望樓層 ¥1,000，加屋頂露台 ¥1,200（09:00–23:00）。天黑後港塔和海洋博物館會亮燈。"}]},
@@ -409,9 +413,9 @@ const DAYS=[
   sum:"御堂筋線約 8 分鐘到梅田，在大阪站周邊用餐。",
   x:[{r:[["metro","なんば → 梅田 約 8 分鐘・¥240"]]},
      {f:{l:"推薦餐廳",o:[
-      {n:"お好み焼き きじ 本店",p:"約 ¥1,000–1,800",d:"梅田藍天大廈地下 1 樓「滝見小路」裡的大阪燒老店，在地人氣很高。",q:"きじ 本店 滝見小路"},
-      {n:"梅田 はがくれ",p:"約 ¥1,000–1,500",d:"大阪駅前第 3 ビル地下的讚岐烏龍麵名店，招牌是淋醬油吃的生醬油烏龍麵。",q:"梅田 はがくれ 本店"},
-      {n:"新梅田食道街",p:"約 ¥1,500–3,000",d:"JR 大阪站旁高架橋下的老字號美食街，串炸、燒鳥、拉麵都有。",q:"新梅田食道街"}]}}]},
+      {n:"うどん棒 大阪本店",p:"約 ¥1,000–1,500",b:"Tabelog 百名店",d:"大阪駅前第 3 ビル地下 2 樓的讚岐烏龍麵名店。週末 11:00–15:00，週一、二公休。",q:"うどん棒 大阪本店"},
+      {n:"串かつ 松葉 総本店",p:"約 ¥1,500–3,000",d:"新梅田食道街 1 樓、創業約 70 年的立食串炸老店。週日 11:00 起營業，只收現金，醬汁禁止二次沾。",q:"串かつ 松葉 総本店"},
+      {n:"阪急三番街・LUCUA 餐廳樓層",p:"¥1,500 起",d:"選擇最多，人多時的備案。"}]}}]},
  {t:"13:10",cat:"shop",n:"梅田百貨",jp:"梅田",q:"阪急うめだ本店",dur:"約 1.5 小時",
   sum:"阪急、阪神、LUCUA 三間百貨以地下街相連，建議擇兩間。",
   x:[{f:{l:"精選店家",o:[
@@ -474,15 +478,16 @@ const DAYS=[
 /* 美食 */
 const MUST=[
  {h:"神戶",items:[
+  {id:"m0",n:"神戶赤ふじ 和牛漢堡排",p:"¥1,320 起",w:"11/12 午餐",d:"Mint 神戶 7 樓，自己的小鐵板煎黑毛和牛漢堡排，白飯免費續碗。",q:"神戸赤ふじ ハンバーグと牛タンとお米 ミント神戸店"},
   {id:"m1",n:"神戶牛鐵板燒",p:"午餐約 ¥9,680",w:"11/14 午餐",d:"神戶行的重點。Ishida 可以網路訂位；菜單標「神戸ビーフ」的才是認證神戶牛。",q:"神戸牛ステーキ Ishida 本店"},
-  {id:"m2",n:"老祥記 豚饅",p:"¥120／個",w:"11/12 午餐",d:"1915 年創業的肉包老店，本店 11/11 剛重新開幕。",q:"老祥記 南京町"},
+  {id:"m2",n:"老祥記 豚饅",p:"¥120／個",w:"11/12 順路",d:"1915 年創業的肉包老店，本店 11/11 剛重新開幕。",q:"老祥記 南京町"},
   {id:"m4",n:"にしむら珈琲 早餐",p:"約 ¥1,100",w:"11/14 早餐",d:"1948 年創業的神戶咖啡老店，在德式木造的本店吃早餐套餐。",q:"にしむら珈琲店 中山手本店"},
   {id:"m5",n:"舊居留地十五番館的下午茶",p:"約 ¥1,500 起",w:"11/12 下午茶",d:"Salon15 TOOTH TOOTH，在百年洋館裡吃季節水果蛋糕。",q:"Salon15 TOOTH TOOTH 旧神戸居留地十五番館"}]},
  {h:"大阪",items:[
   {id:"m9",n:"丸福珈琲店 銅板鬆餅",p:"約 ¥1,500",w:"11/15 早上",d:"1934 年創業，深焙咖啡配銅板煎的鬆餅。",q:"丸福珈琲店 千日前本店"},
   {id:"m10",n:"551 蓬萊 豚まん",p:"2 個約 ¥500",w:"11/15 上午",d:"大阪代表性的肉包，難波本店可外帶，建議趁熱享用。",q:"551蓬莱 本店"},
-  {id:"m6",n:"きじ 大阪燒",p:"約 ¥1,000–1,800",w:"11/15 午餐",d:"梅田藍天大廈地下「滝見小路」裡的大阪燒老店。",q:"きじ 本店 滝見小路"},
-  {id:"m7",n:"はがくれ 生醬油烏龍麵",p:"約 ¥1,000–1,500",w:"11/15 午餐",d:"大阪駅前第 3 ビル地下的讚岐烏龍麵名店，麵條Ｑ彈。",q:"梅田 はがくれ 本店"},
+  {id:"m6",n:"うどん棒 讚岐烏龍麵",p:"約 ¥1,000–1,500",w:"11/15 午餐",d:"大阪駅前第 3 ビル地下 2 樓，Tabelog 百名店。",q:"うどん棒 大阪本店"},
+  {id:"m7",n:"串かつ 松葉 総本店",p:"約 ¥1,500–3,000",w:"11/15 午餐",d:"新梅田食道街的立食串炸老店，只收現金。",q:"串かつ 松葉 総本店"},
   {id:"m11",n:"阪神梅田本店 いか焼き",p:"約 ¥200",w:"11/15 下午",d:"地下 1 樓現烤花枝煎餅，隊伍消化快。",q:"阪神梅田本店"}]}
 ];
 const CAFES=[
@@ -518,6 +523,7 @@ const BUY=[
 const PLACES=[
  {h:"神戶・三宮／元町",list:[
   ["remm plus 神戶三宮","レムプラス神戸三宮","remm plus Kobe Sannomiya","11/12–14"],
+  ["神戶赤ふじ（午餐）","ミント神戸 7F","神戸赤ふじ ハンバーグと牛タンとお米 ミント神戸店","11/12"],
   ["かね竹 燒肉","焼肉処かね竹 三宮店","焼肉処かね竹 三宮店 神戸市中央区下山手通2-4-13","11/12"],
   ["南京町","南京町","Nankinmachi Kobe","11/12"],
   ["大丸神戶店","大丸神戸店","Daimaru Kobe","11/12"],
@@ -542,8 +548,8 @@ const PLACES=[
   ["なんばCITY","なんばCITY","なんばCITY","11/15"],
   ["551 蓬萊 本店","551蓬莱","551蓬莱 本店","11/15"]]},
  {h:"大阪・梅田",list:[
-  ["きじ 本店（午餐）","きじ 滝見小路","きじ 本店 滝見小路","11/15"],
-  ["梅田 はがくれ（午餐）","はがくれ 大阪駅前第3ビル","梅田 はがくれ 本店","11/15"],
+  ["うどん棒 大阪本店（午餐）","大阪駅前第3ビル B2","うどん棒 大阪本店","11/15"],
+  ["串かつ 松葉 総本店（午餐）","新梅田食道街 1F","串かつ 松葉 総本店","11/15"],
   ["Alpen OSAKA","ヤンマー フライングYビル（茶屋町）","Alpen OSAKA 茶屋町","11/15"],
   ["阪急うめだ本店","阪急うめだ本店","阪急うめだ本店","11/15"],
   ["阪神梅田本店","阪神梅田本店","阪神梅田本店","11/15"],
@@ -657,7 +663,7 @@ function viewPlan(){
   const bar=`<div class="bar g"><button class="linkbtn" data-act="all">${anyOpen?"全部收合 −":"全部展開 ＋"}</button></div>`;
   const tl=`<div class="tl g">${d.items.map((it,i)=>{
     const key=sel+"-"+i, isOpen=open.has(key), C=CAT[it.cat]||CAT.tr;
-    const durTxt=it.dur?`${it.cat==="tr"?"車程":"停留"} ${it.dur}`:(it.tz||"");
+    const durTxt=it.dl?it.dl:it.dur?`${it.cat==="tr"?"車程":"停留"} ${it.dur}`:(it.tz||"");
     return `<div class="it${i===ni?" now":""}">
       <div class="tcol"><div class="tm">${it.t}</div>${i===ni?'<span class="nw">現在</span>':""}</div>
       <div class="body">
@@ -667,7 +673,7 @@ function viewPlan(){
         ${it.sum?`<div class="sm">${it.sum}</div>`:""}
         ${it.price?`<div class="pr">${it.price}</div>`:""}
         ${it.talks?talksHtml(it.talks):""}
-        ${it.x?`<button class="more" data-act="toggle" data-key="${key}" aria-expanded="${isOpen}">${isOpen?"收合 −":"展開 ＋"}</button>`:""}
+        ${it.x?`<button class="more" data-act="toggle" data-key="${key}" aria-expanded="${isOpen}" aria-label="${isOpen?"收合詳細":"展開詳細"}">${isOpen?"−":"＋"}</button>`:""}
         ${it.x&&isOpen?`<div class="x">${it.x.map(block).join("")}</div>`:""}
       </div></div>`}).join("")}</div><div class="tfoot g">天氣為 tenki.jp 11/11 發布的神戶預報。</div>`;
   return days+head+bar+tl;
